@@ -1,0 +1,63 @@
+<svg width="1600" height="1100" viewBox="0 0 1600 1100" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1600" height="1100" fill="#1A2621"/>
+  <rect width="1600" height="1100" fill="url(#bgGlow)"/>
+
+  <g opacity="0.2" stroke="#D9C7A1" stroke-width="1.2">
+    <path d="M-20 160C190 80 355 72 522 129C707 191 851 213 1038 170C1230 125 1380 101 1628 170"/>
+    <path d="M-40 240C182 163 350 150 525 206C698 260 864 281 1040 239C1230 194 1395 177 1644 246"/>
+    <path d="M-30 320C201 252 352 236 527 290C699 344 853 365 1038 325C1229 283 1382 274 1630 330"/>
+    <path d="M-36 402C201 334 378 321 542 373C697 423 871 449 1042 405C1221 360 1410 344 1648 410"/>
+    <path d="M-24 493C188 432 377 409 549 459C706 505 888 533 1048 492C1219 449 1399 430 1634 489"/>
+    <path d="M-30 577C205 511 370 497 548 551C719 603 889 623 1064 586C1235 549 1409 532 1638 594"/>
+    <path d="M-34 664C210 603 386 584 553 629C726 675 896 697 1065 664C1232 632 1404 620 1640 677"/>
+    <path d="M-14 753C201 696 380 682 558 727C735 772 896 788 1074 756C1240 727 1425 709 1635 768"/>
+    <path d="M-20 846C221 793 392 773 569 820C743 866 925 886 1092 853C1259 820 1427 807 1642 856"/>
+    <path d="M-10 938C224 885 407 873 580 920C746 963 920 982 1098 947C1278 911 1442 899 1640 944"/>
+  </g>
+
+  <g opacity="0.78">
+    <g transform="translate(210 180) rotate(-10)">
+      <path d="M202 41C152 44 119 70 104 110C81 93 59 89 34 96C52 128 72 149 103 160C67 182 45 214 37 257C67 252 92 238 116 214C120 263 139 309 175 350C198 319 210 286 210 247C244 276 278 288 325 287C304 249 277 223 239 205C282 182 310 145 320 96C276 101 244 117 221 142C218 99 211 67 202 41Z" stroke="#F5E8CF" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M178 79C176 166 176 255 182 340" stroke="#F5E8CF" stroke-width="3" stroke-linecap="round"/>
+      <path d="M179 128C150 114 128 113 107 118" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M179 157C138 160 103 173 77 197" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M181 182C220 169 254 167 290 181" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M181 220C220 224 253 236 283 258" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M180 250C157 268 143 291 136 317" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(958 120) rotate(8)">
+      <path d="M202 41C152 44 119 70 104 110C81 93 59 89 34 96C52 128 72 149 103 160C67 182 45 214 37 257C67 252 92 238 116 214C120 263 139 309 175 350C198 319 210 286 210 247C244 276 278 288 325 287C304 249 277 223 239 205C282 182 310 145 320 96C276 101 244 117 221 142C218 99 211 67 202 41Z" stroke="#F5E8CF" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M178 79C176 166 176 255 182 340" stroke="#F5E8CF" stroke-width="3" stroke-linecap="round"/>
+      <path d="M179 128C150 114 128 113 107 118" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M179 157C138 160 103 173 77 197" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M181 182C220 169 254 167 290 181" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M181 220C220 224 253 236 283 258" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M180 250C157 268 143 291 136 317" stroke="#F5E8CF" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+
+    <g transform="translate(592 552) scale(1.18)">
+      <path d="M202 41C152 44 119 70 104 110C81 93 59 89 34 96C52 128 72 149 103 160C67 182 45 214 37 257C67 252 92 238 116 214C120 263 139 309 175 350C198 319 210 286 210 247C244 276 278 288 325 287C304 249 277 223 239 205C282 182 310 145 320 96C276 101 244 117 221 142C218 99 211 67 202 41Z" stroke="#F1E3C6" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M178 79C176 166 176 255 182 340" stroke="#F1E3C6" stroke-width="3" stroke-linecap="round"/>
+      <path d="M179 128C150 114 128 113 107 118" stroke="#F1E3C6" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M179 157C138 160 103 173 77 197" stroke="#F1E3C6" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M181 182C220 169 254 167 290 181" stroke="#F1E3C6" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M181 220C220 224 253 236 283 258" stroke="#F1E3C6" stroke-width="2.4" stroke-linecap="round"/>
+      <path d="M180 250C157 268 143 291 136 317" stroke="#F1E3C6" stroke-width="2.4" stroke-linecap="round"/>
+    </g>
+  </g>
+
+  <g opacity="0.18" stroke="#EAD7B4" stroke-width="1.6" stroke-linecap="round">
+    <path d="M123 975C222 906 305 866 406 832"/>
+    <path d="M1162 949C1266 879 1349 847 1461 809"/>
+    <path d="M503 1018C592 956 671 923 773 896"/>
+  </g>
+
+  <defs>
+    <radialGradient id="bgGlow" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(802 518) rotate(90) scale(702 1014)">
+      <stop stop-color="#293A33"/>
+      <stop offset="0.52" stop-color="#1E2B25"/>
+      <stop offset="1" stop-color="#131C18"/>
+    </radialGradient>
+  </defs>
+</svg>
