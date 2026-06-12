@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Camping Los Robles | Lago de Sanabria</title>
+  <meta
+    name="description"
+    content="Camping Los Robles en el Lago de Sanabria. Una estancia premium entre naturaleza, restaurante y una experiencia pensada para reservar con claridad."
+  />
+  <meta name="theme-color" content="#c46a2d" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="scroll-progress" aria-hidden="true"></div>
+
+  <header class="site-header" id="top">
+    <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
+
+    <nav class="site-nav" aria-label="Principal">
+      <a class="nav-link" href="#hero">Inicio</a>
+      <a class="nav-link" href="#lake-banner">Lago</a>
+      <a class="nav-link" href="#gallery">Fotos</a>
+      <a class="nav-link" href="#faq">FAQ</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="hero" data-header-tone="dark">
+      <div class="hero-media"></div>
+      <div class="hero-shell">
+        <img class="hero-logo-mark" src="assets/logo-los-robles.svg" alt="Camping Los Robles" />
+      </div>
+    </section>
+
+    <section class="lake-banner" id="lake-banner" data-header-tone="light">
+      <div class="lake-banner-media"></div>
+      <div class="lake-banner-copy reveal">
+        <h2>Bienvenidos al Lago de Sanabria</h2>
+      </div>
+    </section>
+
+    <section class="gallery-strip section-light" id="gallery" data-header-tone="dark">
+      <div class="gallery-carousel reveal">
+        <div class="carousel-track">
+          <div class="carousel-group">
+            <figure class="carousel-card"><img src="assets/gallery-01.jpg" alt="Tienda de campaña junto al lago y al bosque" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-02.jpg" alt="Escena de camping junto al agua en plena naturaleza" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-03.jpg" alt="Parcela entre árboles con vistas al lago" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-04.jpg" alt="Entorno de camping natural junto al agua" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-05.jpg" alt="Bosque y zona de acampada en un paisaje verde" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-06.jpg" alt="Lago rodeado de montañas y naturaleza" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-07.jpg" alt="Vista aérea del lago y del paisaje forestal" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-08.jpg" alt="Ambiente de camping premium entre árboles" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-09.jpg" alt="Zona natural con agua y vegetación abundante" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-10.jpg" alt="Escena de acampada con paisaje de lago y bosque" /></figure>
+          </div>
+          <div class="carousel-group" aria-hidden="true">
+            <figure class="carousel-card"><img src="assets/gallery-01.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-02.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-03.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-04.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-05.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-06.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-07.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-08.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-09.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-10.jpg" alt="" /></figure>
+          </div>
+          <div class="carousel-group" aria-hidden="true">
+            <figure class="carousel-card"><img src="assets/gallery-01.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-02.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-03.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-04.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-05.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-06.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-07.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-08.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-09.jpg" alt="" /></figure>
+            <figure class="carousel-card"><img src="assets/gallery-10.jpg" alt="" /></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-section" data-header-tone="dark">
+      <div class="section-shell cta-card reveal">
+        <div class="cta-copy">
+          <h2>Si el entorno encaja contigo, lo siguiente es asegurar fechas.</h2>
+        </div>
+        <div class="cta-actions">
+          <p class="cta-traits">Lago · Naturaleza · Gastronomía · Escapadas · Descanso</p>
+          <a class="btn btn-primary reserve-link" href="#reserve-modal" data-open-reserve="true">Reservar</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="faq section-light" id="faq" data-header-tone="light">
+      <div class="section-shell faq-grid">
+        <div class="faq-copy reveal">
+          <p class="faq-kicker">FAQ</p>
+          <h2><span>Preguntas</span><span>Frecuentes</span></h2>
+        </div>
+
+        <div class="faq-panel reveal">
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary>¿El camping está cerca del Lago de Sanabria?</summary>
+              <p>Sí. La localización es uno de sus grandes valores y permite disfrutar del lago y del entorno natural con mucha facilidad.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Hay restaurante dentro del recinto?</summary>
+              <p>Sí. El camping cuenta con restaurante y terraza, lo que aporta mucha comodidad durante la estancia.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Es una buena opción para desconectar?</summary>
+              <p>Sí. El enclave, la calma y el planteamiento del camping están orientados a una experiencia de descanso y naturaleza con nivel.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Cómo se hace la reserva?</summary>
+              <p>Desde los botones de reserva accederás al sistema externo para consultar disponibilidad y cerrar la estancia de forma directa.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Es un camping adecuado para familias?</summary>
+              <p>Sí. El entorno, la amplitud y el ritmo del lugar lo hacen muy cómodo para estancias familiares.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Qué tipo de experiencia ofrece el entorno?</summary>
+              <p>Una combinación de lago, naturaleza, descanso y sensación de escapada premium en uno de los paisajes más atractivos de la zona.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Se puede disfrutar del lago con facilidad desde el camping?</summary>
+              <p>Sí. La ubicación permite incorporar el lago como parte central de la estancia y del plan diario.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Es buena opción para una escapada de fin de semana?</summary>
+              <p>Sí. La propuesta funciona muy bien tanto para una estancia corta como para varios días de desconexión.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿La reserva se hace directamente en esta web?</summary>
+              <p>La web te lleva al sistema de reservas para consultar disponibilidad y completar la reserva de forma directa.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Qué diferencia a este camping de otras opciones?</summary>
+              <p>Su combinación de entorno natural, proximidad al lago, restaurante, terraza y una imagen mucho más cuidada y premium.</p>
+            </details>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" data-header-tone="light">
+    <div class="footer-overlay"></div>
+    <div class="footer-shell reveal">
+      <div class="footer-top">
+        <div class="footer-brand-row">
+          <img class="footer-logo" src="assets/logo.svg" alt="Camping Los Robles" />
+          <p class="footer-lead">Una estancia premium junto al Lago de Sanabria, donde naturaleza, descanso y reserva directa conviven con una imagen cuidada y una experiencia completa.</p>
+        </div>
+      </div>
+
+      <div class="footer-meta">
+        <div class="footer-meta-card footer-meta-card-map">
+          <div class="footer-map-frame">
+            <div class="map-consent-placeholder" data-map-placeholder="true">
+              <p>Activa las cookies opcionales para cargar el mapa de Google del camping.</p>
+              <button class="btn btn-primary map-consent-trigger" type="button" data-open-cookie-banner="true">Aceptar cookies y ver mapa</button>
+            </div>
+            <iframe
+              title="Mapa de Camping Los Robles"
+              data-map-src="https://www.google.com/maps?q=Ctra.%20Puebla%20de%20Sanabria-Ribadelago,%20P.K.%2013,400,%20Lago%20de%20Sanabria,%20Zamora&output=embed"
+              loading="lazy"
+              referrerpolicy="no-referrer-when-downgrade"
+              hidden
+            ></iframe>
+          </div>
+        </div>
+        <div class="footer-meta-card">
+          <span class="meta-label">Contacto</span>
+          <div class="footer-contact-list">
+            <a href="tel:+34689417987">689 41 79 87</a>
+            <a href="mailto:reservas@losrobles.info">reservas@losrobles.info</a>
+            <p>Atención directa para resolver dudas sobre estancia, reserva y experiencia en destino.</p>
+            <p>Consulta disponibilidad, servicios del camping, propuesta gastronómica y recomendaciones para tu escapada al Lago de Sanabria.</p>
+          </div>
+        </div>
+        <div class="footer-meta-card">
+          <div class="footer-project-copy">
+            <p>Camping Los Robles es una propuesta turística premium en el Lago de Sanabria pensada para quienes buscan naturaleza, descanso, gastronomía y una reserva directa en un entorno cuidado.</p>
+            <p>Una estancia con identidad propia para escapadas, vacaciones en familia y experiencias al aire libre en uno de los enclaves más potentes de Zamora.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>Camping Los Robles</p>
+        <p>Lago de Sanabria · Zamora</p>
+        <p class="footer-legal-links">
+          <a href="politica-privacidad.html">Política de privacidad</a>
+          <a href="politica-cookies.html">Política de cookies</a>
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <div class="reserve-modal" id="reserve-modal" aria-hidden="true">
+    <div class="reserve-modal-backdrop" data-close-reserve="true"></div>
+    <div class="reserve-dialog" role="dialog" aria-modal="true" aria-labelledby="reserve-title">
+      <button class="reserve-close" type="button" aria-label="Cerrar formulario" data-close-reserve="true">+</button>
+      <div class="reserve-dialog-copy">
+        <h2 id="reserve-title">Solicitud de reserva</h2>
+        <button class="reserve-cart-toggle" type="button" aria-label="Ver resumen de la reserva" data-open-reserve-summary="true">
+          <span class="reserve-cart-warning" data-reserve-required-warning="true" hidden>Rellene los campos obligatorios</span>
+          <span class="reserve-cart-edit">Editar</span>
+          <span class="vehicle-total-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" focusable="false">
+              <path d="M3 4h2.4l2.1 10.2h9.9l2.1-6.7H7" />
+              <path d="M9 19.5h.1M17 19.5h.1" />
+            </svg>
+          </span>
+          <strong class="vehicle-total-amount" data-reserve-total="true">8,90 €</strong>
+          <span class="reserve-cart-submit">Enviar solicitud</span>
+        </button>
+      </div>
+
+      <form class="reserve-form" id="reserve-form">
+        <input type="hidden" name="_subject" value="Nueva solicitud de reserva · Camping Los Robles" />
+        <input type="hidden" name="_template" value="box" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="visually-hidden-field" />
+        <input type="hidden" name="form_origin" value="Landing Lago de Sanabria" />
+        <input type="hidden" name="request_summary" value="" />
+        <div class="reserve-fields-view" data-reserve-view="form">
+          <div class="reserve-top-grid">
+            <div class="reserve-top-column reserve-top-column-left">
+              <label class="form-field">
+                <input type="text" name="full_name" autocomplete="name" placeholder="Nombre completo *" required />
+              </label>
+
+              <label class="form-field">
+                <input type="email" name="email" autocomplete="email" placeholder="Email *" required />
+              </label>
+
+              <label class="form-field">
+                <input type="tel" name="phone" autocomplete="tel" placeholder="Teléfono" />
+              </label>
+            </div>
+
+            <div class="reserve-top-column reserve-top-column-right">
+              <div class="guest-controls" aria-label="Contadores de ocupación">
+                <label class="counter-field">
+                  <div class="counter-pill" data-counter="adults">
+                    <button type="button" class="counter-action" data-counter-action="decrease" data-counter-target="adults" aria-label="Restar adulto">−</button>
+                    <span class="counter-pill-center">
+                      <span class="counter-pill-label">Adultos</span>
+                      <input type="number" name="adults" value="1" min="1" max="12" readonly />
+                    </span>
+                    <button type="button" class="counter-action" data-counter-action="increase" data-counter-target="adults" aria-label="Sumar adulto">+</button>
+                  </div>
+                </label>
+                <label class="counter-field">
+                  <div class="counter-pill" data-counter="children">
+                    <button type="button" class="counter-action" data-counter-action="decrease" data-counter-target="children" aria-label="Restar niño">−</button>
+                    <span class="counter-pill-center">
+                      <span class="counter-pill-label">Niños (3-8)</span>
+                      <input type="number" name="children" value="0" min="0" max="12" readonly />
+                    </span>
+                    <button type="button" class="counter-action" data-counter-action="increase" data-counter-target="children" aria-label="Sumar niño">+</button>
+                  </div>
+                </label>
+                <label class="counter-field">
+                  <div class="counter-pill" data-counter="pets">
+                    <button type="button" class="counter-action" data-counter-action="decrease" data-counter-target="pets" aria-label="Restar mascota">−</button>
+                    <span class="counter-pill-center">
+                      <span class="counter-pill-label">Mascotas</span>
+                      <input type="number" name="pets" value="0" min="0" max="6" readonly />
+                    </span>
+                    <button type="button" class="counter-action" data-counter-action="increase" data-counter-target="pets" aria-label="Sumar mascota">+</button>
+                  </div>
+                </label>
+              </div>
+
+              <label class="form-field form-field-textarea">
+                <textarea name="notes" rows="4" placeholder="Añade un comentario o coméntanos lo que necesitas"></textarea>
+              </label>
+            </div>
+          </div>
+
+          <div class="reserve-bottom-grid">
+          <fieldset class="form-block vehicle-block">
+            <div class="vehicle-grid">
+              <label class="vehicle-card vehicle-card-tienda">
+                <input type="checkbox" name="vehicle_items" value="tienda" data-price="9" />
+                <span class="vehicle-label">Tienda</span>
+                <span class="vehicle-icon" aria-hidden="true">
+                  <img src="assets/tienda.svg" alt="" />
+                </span>
+                <span class="vehicle-meta">
+                  <span class="vehicle-measure">&lt; 4 m</span>
+                  <span class="vehicle-price">9,0 €</span>
+                </span>
+              </label>
+              <label class="vehicle-card vehicle-card-moto">
+                <input type="checkbox" name="vehicle_items" value="moto" data-price="5.8" />
+                <span class="vehicle-label">Moto</span>
+                <span class="vehicle-icon" aria-hidden="true">
+                  <img src="assets/moto.svg" alt="" />
+                </span>
+                <span class="vehicle-meta">
+                  <span class="vehicle-measure">&lt; 3 m</span>
+                  <span class="vehicle-price">5,8 €</span>
+                </span>
+              </label>
+              <label class="vehicle-card vehicle-card-coche">
+                <input type="checkbox" name="vehicle_items" value="coche" data-price="7" />
+                <span class="vehicle-label">Coche</span>
+                <span class="vehicle-icon" aria-hidden="true">
+                  <img src="assets/1x/coche.png" alt="" />
+                </span>
+                <span class="vehicle-meta">
+                  <span class="vehicle-measure">4 - 5 m</span>
+                  <span class="vehicle-price">7,0 €</span>
+                </span>
+              </label>
+              <label class="vehicle-card vehicle-card-furgo">
+                <input type="checkbox" name="vehicle_items" value="furgo" data-price="10.25" />
+                <span class="vehicle-label">Furgo</span>
+                <span class="vehicle-icon" aria-hidden="true">
+                  <img src="assets/1x/furgo.png" alt="" />
+                </span>
+                <span class="vehicle-meta">
+                  <span class="vehicle-measure">4,5 - 5,5 m</span>
+                  <span class="vehicle-price">10,25 €</span>
+                </span>
+              </label>
+              <label class="vehicle-card vehicle-card-camper">
+                <input type="checkbox" name="vehicle_items" value="camper" data-price="10.25" />
+                <span class="vehicle-label">Camper</span>
+                <span class="vehicle-icon" aria-hidden="true">
+                  <img src="assets/1x/camper.png" alt="" />
+                </span>
+                <span class="vehicle-meta">
+                  <span class="vehicle-measure">5 - 6,5 m</span>
+                  <span class="vehicle-price">10,25 €</span>
+                </span>
+              </label>
+              <label class="vehicle-card vehicle-card-caravana">
+                <input type="checkbox" name="vehicle_items" value="caravana" data-price="14.5" />
+                <span class="vehicle-label">Caravana</span>
+                <span class="vehicle-icon" aria-hidden="true">
+                  <img src="assets/1x/caravana.png" alt="" />
+                </span>
+                <span class="vehicle-meta">
+                  <span class="vehicle-measure">6,5 m +</span>
+                  <span class="vehicle-price">14,5 €</span>
+                </span>
+              </label>
+            </div>
+            <div class="vehicle-footer">
+              <label class="utility-toggle">
+                <input type="checkbox" name="water_electricity" value="yes" data-price="7.8" />
+                <span class="utility-toggle-label">Acceso a Agua y Luz</span>
+                <strong>+7,8 €</strong>
+              </label>
+            </div>
+          </fieldset>
+
+          <fieldset class="form-block date-block">
+            <div class="date-mode">
+              <label class="toggle-chip">
+                <input type="radio" name="date_mode" value="exact" checked />
+                <span>Fechas exactas</span>
+              </label>
+              <label class="toggle-chip">
+                <input type="radio" name="date_mode" value="flexible" />
+                <span>Fechas flexibles</span>
+              </label>
+            </div>
+
+            <div class="date-panels">
+              <div class="date-panel is-active" data-date-panel="exact">
+                <div class="calendar-shell">
+                  <div class="calendar-toolbar">
+                    <button class="calendar-nav" type="button" data-calendar-nav="prev" aria-label="Mes anterior">‹</button>
+                    <div class="calendar-selection">
+                      <span data-selected-range="true">Selecciona llegada y salida</span>
+                    </div>
+                    <button class="calendar-nav" type="button" data-calendar-nav="next" aria-label="Mes siguiente">›</button>
+                  </div>
+                  <div class="calendar-grid" id="calendar-grid"></div>
+                  <input type="hidden" name="arrival_date" id="arrival_date" />
+                  <input type="hidden" name="departure_date" id="departure_date" />
+                </div>
+              </div>
+
+              <div class="date-panel" data-date-panel="flexible">
+                <div class="flex-stay">
+                  <div class="flex-label">Duración flexible</div>
+                  <div class="flex-grid">
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_window" value="finde" checked />
+                      <span>Fin de semana</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_window" value="semana" />
+                      <span>1 semana</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_window" value="quincena" />
+                      <span>15 días</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_window" value="mes" />
+                      <span>1 mes</span>
+                    </label>
+                  </div>
+                </div>
+                <div class="flex-months">
+                  <div class="flex-label">¿Cuándo te viene mejor?</div>
+                  <div class="flex-grid flex-grid-months">
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_month" value="abril" checked />
+                      <span>Abril</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_month" value="mayo" />
+                      <span>Mayo</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_month" value="junio" />
+                      <span>Junio</span>
+                    </label>
+                    <label class="toggle-chip">
+                      <input type="radio" name="flex_month" value="julio" />
+                      <span>Julio</span>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </fieldset>
+        </div>
+        </div>
+
+        <div class="reserve-summary-view" data-reserve-view="summary" hidden>
+          <div class="reserve-summary-card">
+            <div class="reserve-summary-top">
+              <div>
+                <p class="reserve-summary-kicker">Resumen</p>
+              </div>
+            </div>
+            <div class="reserve-summary-lines" data-reserve-summary-lines="true"></div>
+            <div class="reserve-summary-total">
+              <span>Total estimado</span>
+              <strong data-reserve-summary-total="true">8,90 €</strong>
+            </div>
+          </div>
+          <div class="reserve-form-footer">
+            <p>Te contactaremos para confirmar encaje, disponibilidad y recopilar el resto de datos necesarios.</p>
+            <button class="btn btn-primary reserve-submit" type="submit">Enviar solicitud</button>
+          </div>
+        </div>
+        <p class="reserve-success" id="reserve-success" hidden>Solicitud enviada. Te contactaremos en breve para continuar la reserva.</p>
+      </form>
+
+      <div class="reserve-status-view" aria-live="polite" aria-hidden="true" hidden>
+        <div class="reserve-status-card reserve-status-card-loading">
+          <span class="reserve-loader" aria-hidden="true"></span>
+          <p>Enviando solicitud...</p>
+        </div>
+        <div class="reserve-status-card reserve-status-card-success">
+          <p class="reserve-status-kicker">Solicitud enviada</p>
+          <h3>Gracias por confiar en Camping Los Robles.</h3>
+          <p>Hemos recibido tu solicitud correctamente. Revisaremos disponibilidad y te contactaremos con los siguientes pasos por email o teléfono si lo has indicado.</p>
+        </div>
+        <div class="reserve-status-card reserve-status-card-error">
+          <p class="reserve-status-kicker">No se ha podido enviar</p>
+          <h3>Revisa la conexión e inténtalo de nuevo.</h3>
+          <p>La solicitud no se ha enviado. Puedes volver al formulario y probar de nuevo en unos segundos.</p>
+          <button class="reserve-status-back" type="button" data-reserve-status-back="true">Volver al formulario</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <a class="floating-reserve reserve-link" href="#reserve-modal" data-open-reserve="true" aria-label="Reservar ahora">
+    <span class="floating-reserve-text">Reservar</span>
+  </a>
+
+  <aside class="cookie-banner" id="cookie-banner" aria-live="polite" aria-label="Aviso de cookies">
+    <div class="cookie-banner-card">
+      <p class="cookie-kicker">Cookies</p>
+      <h2>Usamos cookies necesarias y, si lo autorizas, cookies de terceros para mostrar el mapa y mejorar la experiencia.</h2>
+      <p class="cookie-copy">Puedes aceptar todas, rechazar las opcionales o quedarte solo con las necesarias.</p>
+      <div class="cookie-actions">
+        <button class="btn btn-primary" type="button" data-cookie-choice="accept-all">Aceptar</button>
+        <button class="btn btn-secondary cookie-secondary" type="button" data-cookie-choice="reject-all">Rechazar</button>
+        <button class="btn btn-secondary cookie-secondary" type="button" data-cookie-choice="necessary-only">Solo necesarias</button>
+      </div>
+      <p class="cookie-links">
+        <a href="politica-privacidad.html">Política de privacidad</a>
+        <a href="politica-cookies.html">Política de cookies</a>
+      </p>
+    </div>
+  </aside>
+
+  <script src="script.js"></script>
+</body>
+</html>
