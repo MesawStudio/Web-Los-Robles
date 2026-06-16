@@ -39,6 +39,7 @@ const reserveSubmitButton = document.querySelector('.reserve-submit');
 const COOKIE_STORAGE_KEY = 'losrobles_cookie_choice_v1';
 const CALENDAR_MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const CALENDAR_DAY_NAMES = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
+const OPENING_DATE = new Date(2026, 6, 1);
 const RESERVE_FORM_ENDPOINT = 'https://formsubmit.co/ajax/d7364b2bb06e2ce52e961dcac923e7f1';
 const RESERVE_PRICES = {
   adults: 8.9,
@@ -58,7 +59,7 @@ let carouselOffset = 0;
 let carouselLastTime = 0;
 let carouselFrame = 0;
 let carouselLoopDistance = 0;
-let calendarVisibleMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+let calendarVisibleMonth = new Date(OPENING_DATE.getFullYear(), OPENING_DATE.getMonth(), 1);
 let selectedStartDate = null;
 let selectedEndDate = null;
 let appInitialized = false;
@@ -572,7 +573,7 @@ function resetReserveFormUi(options = {}) {
   if (petsInput) petsInput.value = '0';
   selectedStartDate = null;
   selectedEndDate = null;
-  calendarVisibleMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
+  calendarVisibleMonth = new Date(OPENING_DATE.getFullYear(), OPENING_DATE.getMonth(), 1);
   setDateMode('exact');
   renderCalendar();
   if (!options.keepStatus) setReserveSummaryView(false);
@@ -634,7 +635,7 @@ function updateSelectedRangeLabel() {
   } else if (selectedStartDate) {
     calendarRangeLabel.textContent = `${formatLongDate(selectedStartDate)} - Elige salida`;
   } else {
-    calendarRangeLabel.textContent = 'Selecciona llegada y salida';
+    calendarRangeLabel.textContent = 'Disponible desde el 1 de julio de 2026';
   }
 
   if (arrivalInput) arrivalInput.value = selectedStartDate ? toIsoDate(selectedStartDate) : '';
@@ -649,6 +650,7 @@ function renderMonth(monthDate) {
   const leadingBlanks = (firstDay.getDay() + 6) % 7;
   const today = new Date();
   today.setHours(0, 0, 0, 0);
+  const minSelectableDate = new Date(Math.max(today.getTime(), OPENING_DATE.getTime()));
 
   let daysMarkup = '';
 
@@ -658,7 +660,7 @@ function renderMonth(monthDate) {
 
   for (let day = 1; day <= lastDay.getDate(); day += 1) {
     const date = new Date(year, month, day);
-    const isDisabled = date < today;
+    const isDisabled = date < minSelectableDate;
     const classes = ['calendar-day'];
     if (sameDate(date, selectedStartDate)) classes.push('is-start');
     if (sameDate(date, selectedEndDate)) classes.push('is-end');
@@ -693,6 +695,10 @@ function renderMonth(monthDate) {
 
 function renderCalendar() {
   if (!calendarGrid) return;
+  const openingMonth = new Date(OPENING_DATE.getFullYear(), OPENING_DATE.getMonth(), 1);
+  if (calendarVisibleMonth < openingMonth) {
+    calendarVisibleMonth = openingMonth;
+  }
   calendarGrid.innerHTML = renderMonth(calendarVisibleMonth);
   updateSelectedRangeLabel();
 }
@@ -857,7 +863,9 @@ calendarGrid?.addEventListener('click', (event) => {
 document.querySelectorAll('[data-calendar-nav]').forEach((button) => {
   button.addEventListener('click', () => {
     const direction = button.dataset.calendarNav === 'next' ? 1 : -1;
-    calendarVisibleMonth = new Date(calendarVisibleMonth.getFullYear(), calendarVisibleMonth.getMonth() + direction, 1);
+    const nextMonth = new Date(calendarVisibleMonth.getFullYear(), calendarVisibleMonth.getMonth() + direction, 1);
+    const openingMonth = new Date(OPENING_DATE.getFullYear(), OPENING_DATE.getMonth(), 1);
+    calendarVisibleMonth = nextMonth < openingMonth ? openingMonth : nextMonth;
     renderCalendar();
   });
 });
