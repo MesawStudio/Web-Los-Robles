@@ -911,8 +911,8 @@ h3 {
 
 .reserve-close {
   position: absolute;
-  top: 50px;
-  right: 18px;
+  top: 50%;
+  right: 20px;
   width: 26px;
   height: 26px;
   display: grid;
@@ -976,13 +976,30 @@ h3 {
   display: grid;
 }
 
-.reserve-dialog.is-sending .reserve-dialog-copy,
 .reserve-dialog.is-sending .reserve-form,
-.reserve-dialog.is-sent .reserve-dialog-copy,
 .reserve-dialog.is-sent .reserve-form,
-.reserve-dialog.is-send-error .reserve-dialog-copy,
 .reserve-dialog.is-send-error .reserve-form {
   visibility: hidden;
+}
+
+.reserve-dialog.is-sending .reserve-dialog-copy,
+.reserve-dialog.is-sent .reserve-dialog-copy,
+.reserve-dialog.is-send-error .reserve-dialog-copy {
+  z-index: 20;
+  background: transparent;
+  pointer-events: none;
+}
+
+.reserve-dialog.is-sending .reserve-dialog-copy h2,
+.reserve-dialog.is-sent .reserve-dialog-copy h2,
+.reserve-dialog.is-send-error .reserve-dialog-copy h2 {
+  visibility: hidden;
+}
+
+.reserve-dialog.is-sending .reserve-close,
+.reserve-dialog.is-sent .reserve-close,
+.reserve-dialog.is-send-error .reserve-close {
+  pointer-events: auto;
 }
 
 .reserve-dialog.is-sending,
@@ -2145,7 +2162,7 @@ body.modal-open {
   }
 
   .reserve-close {
-    top: 34px;
+    top: 50%;
     right: 14px;
     width: 24px;
     height: 24px;
@@ -2358,10 +2375,10 @@ body.modal-open {
   }
 
   .reserve-close {
-    position: fixed;
-    top: max(28px, calc((100svh - min(calc(100svh - 138px), 920px)) / 2 + 20px));
-    right: max(34px, calc((100vw - 1160px) / 2 + 28px));
-    transform: rotate(45deg);
+    position: absolute;
+    top: 50%;
+    right: 18px;
+    transform: translateY(-50%) rotate(45deg);
     z-index: 1001;
   }
 
@@ -2973,13 +2990,13 @@ body.modal-open {
   }
 
   .reserve-close {
-    position: fixed;
-    top: 60px;
-    right: 26px;
+    position: absolute;
+    top: 50%;
+    right: 18px;
     width: 24px;
     height: 24px;
     font-size: 0.92rem;
-    transform: rotate(45deg);
+    transform: translateY(-50%) rotate(45deg);
     z-index: 1001;
   }
 
