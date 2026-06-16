@@ -3,11 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Camping Los Robles | Lago de Sanabria</title>
+  <title>Camping Los Robles | Camping en el Lago de Sanabria</title>
   <meta
     name="description"
-    content="Camping Los Robles en el Lago de Sanabria. Una estancia premium entre naturaleza, restaurante y una experiencia pensada para reservar con claridad."
+    content="Camping Los Robles en el Lago de Sanabria. Solicita tu estancia en un entorno natural de Zamora con parcelas para tienda, coche, camper o caravana."
   />
+  <link rel="canonical" href="https://web-los-robles.vercel.app/" />
+  <meta name="robots" content="index, follow" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="es_ES" />
+  <meta property="og:site_name" content="Camping Los Robles" />
+  <meta property="og:title" content="Camping Los Robles | Lago de Sanabria" />
+  <meta property="og:description" content="Solicita tu estancia en Camping Los Robles, junto al Lago de Sanabria, con parcelas para tienda, coche, camper o caravana." />
+  <meta property="og:url" content="https://web-los-robles.vercel.app/" />
+  <meta property="og:image" content="https://web-los-robles.vercel.app/assets/hero-new.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Camping Los Robles | Lago de Sanabria" />
+  <meta name="twitter:description" content="Camping en el entorno del Lago de Sanabria. Solicita disponibilidad y recibe confirmación personalizada." />
+  <meta name="twitter:image" content="https://web-los-robles.vercel.app/assets/hero-new.jpg" />
   <meta name="theme-color" content="#c46a2d" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <link rel="preload" as="image" href="assets/fondoweb.jpg" fetchpriority="high" />
@@ -22,10 +35,69 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Campground",
+    "name": "Camping Los Robles",
+    "url": "https://web-los-robles.vercel.app/",
+    "image": "https://web-los-robles.vercel.app/assets/hero-new.jpg",
+    "telephone": "+34671256846",
+    "email": "reservas@losrobles.info",
+    "priceRange": "€€",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Ctra. Puebla de Sanabria-Ribadelago, P.K. 13,400",
+      "addressLocality": "Lago de Sanabria",
+      "addressRegion": "Zamora",
+      "addressCountry": "ES"
+    }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Cómo funciona la solicitud de reserva?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Envías la solicitud con fechas, ocupación y necesidades. El camping revisa disponibilidad y te contacta para confirmar la estancia."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿La reserva queda confirmada al enviar el formulario?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. El formulario es una solicitud. La reserva queda pendiente hasta que el camping confirme disponibilidad y condiciones."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo se realiza el pago?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Una vez revisada la disponibilidad, el camping enviará el enlace de pago o las instrucciones correspondientes para formalizar la reserva."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿El restaurante está abierto?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Actualmente el restaurante se encuentra en reforma. El camping informará del estado actualizado al confirmar la solicitud."
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
   <div class="scroll-progress" aria-hidden="true"></div>
-  <div class="site-version" aria-label="Versión desplegada">v6</div>
+  <div class="site-version" aria-label="Versión desplegada">v7</div>
 
   <header class="site-header" id="top">
     <button class="menu-toggle" aria-label="Abrir menú" aria-expanded="false">☰</button>
@@ -42,6 +114,7 @@
     <section class="hero" id="hero" data-header-tone="dark">
       <div class="hero-media"></div>
       <div class="hero-shell">
+        <h1 class="sr-only">Camping Los Robles en el Lago de Sanabria</h1>
         <img class="hero-logo-mark" src="assets/logo-los-robles.svg" alt="Camping Los Robles" />
       </div>
     </section>
@@ -102,7 +175,7 @@
           <h2>Si el entorno encaja contigo, lo siguiente es asegurar fechas.</h2>
         </div>
         <div class="cta-actions">
-          <p class="cta-traits">Lago · Naturaleza · Gastronomía · Escapadas · Descanso</p>
+          <p class="cta-traits">Lago · Naturaleza · Escapadas · Descanso · Reserva bajo solicitud</p>
           <a class="btn btn-primary reserve-link" href="#reserve-modal" data-open-reserve="true">Reservar</a>
         </div>
       </div>
@@ -118,44 +191,44 @@
         <div class="faq-panel reveal">
           <div class="faq-list">
             <details class="faq-item">
+              <summary>¿Cómo funciona la solicitud de reserva?</summary>
+              <p>Rellenas el formulario con fechas, ocupación, vehículo y necesidades. Revisaremos disponibilidad y te contactaremos para confirmar si la estancia encaja.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿La reserva queda confirmada al enviar el formulario?</summary>
+              <p>No. El formulario es una solicitud de disponibilidad. La reserva queda pendiente hasta que el camping confirme fechas, condiciones y próximos pasos.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿Cómo se realiza el pago?</summary>
+              <p>Una vez revisada la disponibilidad, el camping enviará el enlace de pago o las instrucciones correspondientes para formalizar la reserva.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿El precio mostrado es definitivo?</summary>
+              <p>El importe que aparece en la solicitud es una estimación según los datos seleccionados. El precio final se confirmará antes de formalizar la reserva.</p>
+            </details>
+            <details class="faq-item">
+              <summary>¿El restaurante está abierto?</summary>
+              <p>Actualmente el restaurante se encuentra en reforma. Te informaremos del estado actualizado al confirmar la solicitud de reserva.</p>
+            </details>
+            <details class="faq-item">
               <summary>¿El camping está cerca del Lago de Sanabria?</summary>
-              <p>Sí. La localización es uno de sus grandes valores y permite disfrutar del lago y del entorno natural con mucha facilidad.</p>
+              <p>Sí. Está en el entorno del Lago de Sanabria, una zona natural ideal para descansar, hacer rutas y disfrutar del paisaje de Zamora.</p>
             </details>
             <details class="faq-item">
-              <summary>¿Hay restaurante dentro del recinto?</summary>
-              <p>Sí. El camping cuenta con restaurante y terraza, lo que aporta mucha comodidad durante la estancia.</p>
+              <summary>¿Se admiten mascotas?</summary>
+              <p>Puedes indicarlo en la solicitud. Revisaremos las condiciones aplicables y te confirmaremos los detalles antes de cerrar la reserva.</p>
             </details>
             <details class="faq-item">
-              <summary>¿Es una buena opción para desconectar?</summary>
-              <p>Sí. El enclave, la calma y el planteamiento del camping están orientados a una experiencia de descanso y naturaleza con nivel.</p>
+              <summary>¿Puedo solicitar acceso a agua y luz?</summary>
+              <p>Sí. Puedes seleccionarlo en el formulario y se tendrá en cuenta en la estimación de precio y en la revisión de disponibilidad.</p>
             </details>
             <details class="faq-item">
-              <summary>¿Cómo se hace la reserva?</summary>
-              <p>Desde los botones de reserva accederás al sistema externo para consultar disponibilidad y cerrar la estancia de forma directa.</p>
+              <summary>¿Puedo viajar con tienda, coche, camper o caravana?</summary>
+              <p>Sí. El formulario permite indicar el tipo de vehículo o elemento de acampada para calcular mejor la solicitud.</p>
             </details>
             <details class="faq-item">
-              <summary>¿Es un camping adecuado para familias?</summary>
-              <p>Sí. El entorno, la amplitud y el ritmo del lugar lo hacen muy cómodo para estancias familiares.</p>
-            </details>
-            <details class="faq-item">
-              <summary>¿Qué tipo de experiencia ofrece el entorno?</summary>
-              <p>Una combinación de lago, naturaleza, descanso y sensación de escapada premium en uno de los paisajes más atractivos de la zona.</p>
-            </details>
-            <details class="faq-item">
-              <summary>¿Se puede disfrutar del lago con facilidad desde el camping?</summary>
-              <p>Sí. La ubicación permite incorporar el lago como parte central de la estancia y del plan diario.</p>
-            </details>
-            <details class="faq-item">
-              <summary>¿Es buena opción para una escapada de fin de semana?</summary>
-              <p>Sí. La propuesta funciona muy bien tanto para una estancia corta como para varios días de desconexión.</p>
-            </details>
-            <details class="faq-item">
-              <summary>¿La reserva se hace directamente en esta web?</summary>
-              <p>La web te lleva al sistema de reservas para consultar disponibilidad y completar la reserva de forma directa.</p>
-            </details>
-            <details class="faq-item">
-              <summary>¿Qué diferencia a este camping de otras opciones?</summary>
-              <p>Su combinación de entorno natural, proximidad al lago, restaurante, terraza y una imagen mucho más cuidada y premium.</p>
+              <summary>¿Qué pasa si mis fechas son flexibles?</summary>
+              <p>Puedes elegir fechas flexibles para que el camping valore alternativas disponibles y te proponga la opción que mejor encaje.</p>
             </details>
           </div>
         </div>
@@ -169,7 +242,7 @@
       <div class="footer-top">
         <div class="footer-brand-row">
           <img class="footer-logo" src="assets/logo.svg" alt="Camping Los Robles" />
-          <p class="footer-lead">Una estancia premium junto al Lago de Sanabria, donde naturaleza, descanso y reserva directa conviven con una imagen cuidada y una experiencia completa.</p>
+          <p class="footer-lead">Una estancia junto al Lago de Sanabria, donde naturaleza, descanso y atención directa conviven con una experiencia cuidada desde la solicitud de reserva.</p>
         </div>
       </div>
 
@@ -195,12 +268,12 @@
             <a href="tel:+34671256846">+34 671 256 846</a>
             <a href="mailto:reservas@losrobles.info">reservas@losrobles.info</a>
             <p>Atención directa para resolver dudas sobre estancia, reserva y experiencia en destino.</p>
-            <p>Consulta disponibilidad, servicios del camping, propuesta gastronómica y recomendaciones para tu escapada al Lago de Sanabria.</p>
+            <p>Consulta disponibilidad, servicios del camping, estado de instalaciones y recomendaciones para tu escapada al Lago de Sanabria.</p>
           </div>
         </div>
         <div class="footer-meta-card">
           <div class="footer-project-copy">
-            <p>Camping Los Robles es una propuesta turística premium en el Lago de Sanabria pensada para quienes buscan naturaleza, descanso, gastronomía y una reserva directa en un entorno cuidado.</p>
+            <p>Camping Los Robles es una propuesta turística en el Lago de Sanabria pensada para quienes buscan naturaleza, descanso y una atención directa antes de confirmar su estancia.</p>
             <p>Una estancia con identidad propia para escapadas, vacaciones en familia y experiencias al aire libre en uno de los enclaves más potentes de Zamora.</p>
           </div>
         </div>
@@ -212,6 +285,9 @@
         <p class="footer-legal-links">
           <a href="politica-privacidad.html">Política de privacidad</a>
           <a href="politica-cookies.html">Política de cookies</a>
+          <a href="aviso-legal.html">Aviso legal</a>
+          <a href="condiciones-reserva.html">Condiciones de reserva</a>
+          <button class="footer-cookie-button" type="button" data-open-cookie-banner="true">Configurar cookies</button>
         </p>
       </div>
     </div>
@@ -488,6 +564,10 @@
             </div>
           </div>
           <div class="reserve-form-footer">
+            <label class="privacy-consent">
+              <input type="checkbox" name="privacy_acceptance" value="Aceptada" required />
+              <span>He leído y acepto la <a href="politica-privacidad.html" target="_blank" rel="noopener">Política de privacidad</a> y entiendo que esta solicitud no confirma automáticamente la reserva.</span>
+            </label>
             <p>Te contactaremos para confirmar encaje, disponibilidad y recopilar el resto de datos necesarios.</p>
             <button class="btn btn-primary reserve-submit" type="submit">Enviar solicitud</button>
           </div>
