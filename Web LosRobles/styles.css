@@ -68,6 +68,22 @@ select {
   background: linear-gradient(90deg, var(--gold), #d98b4d);
 }
 
+.site-version {
+  position: fixed;
+  top: 6px;
+  right: 8px;
+  z-index: 999;
+  padding: 3px 7px;
+  border-radius: 999px;
+  background: rgba(23, 24, 26, 0.72);
+  color: var(--paper-strong);
+  font-size: 0.68rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  pointer-events: none;
+}
+
 .site-header {
   position: fixed;
   top: 22px;
