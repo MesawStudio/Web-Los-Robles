@@ -978,13 +978,17 @@ h3 {
 
 .reserve-dialog.is-sending .reserve-dialog-copy,
 .reserve-dialog.is-sending .reserve-form,
-.reserve-dialog.is-sending .reserve-close,
 .reserve-dialog.is-sent .reserve-dialog-copy,
 .reserve-dialog.is-sent .reserve-form,
-.reserve-dialog.is-sent .reserve-close,
 .reserve-dialog.is-send-error .reserve-dialog-copy,
 .reserve-dialog.is-send-error .reserve-form {
   visibility: hidden;
+}
+
+.reserve-dialog.is-sending,
+.reserve-dialog.is-sent,
+.reserve-dialog.is-send-error {
+  overflow: hidden;
 }
 
 .reserve-dialog.is-sending {
@@ -1001,6 +1005,9 @@ h3 {
   display: none !important;
   width: min(620px, 100%);
   justify-items: center;
+  align-content: center;
+  max-height: 100%;
+  overflow: hidden;
 }
 
 .reserve-dialog.is-sending .reserve-status-card-loading,
@@ -2013,8 +2020,10 @@ h3 {
 }
 
 .reserve-summary-line span {
+  min-width: 0;
   color: var(--anthracite);
   font-weight: 800;
+  line-height: 1.18;
 }
 
 .reserve-summary-line small {
@@ -2023,6 +2032,8 @@ h3 {
   color: var(--anthracite-soft);
   font-size: 0.78rem;
   font-weight: 700;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
 }
 
 .reserve-summary-line strong {
@@ -2774,6 +2785,18 @@ body.modal-open {
     padding: 28px;
   }
 
+  .reserve-status-card h3 {
+    font-size: clamp(2rem, 9vw, 3rem);
+    line-height: 1;
+  }
+
+  .reserve-status-card-success p:last-child,
+  .reserve-status-card-error p:last-of-type {
+    margin-top: 16px;
+    font-size: 0.95rem;
+    line-height: 1.55;
+  }
+
   .hero-shell,
   .section-shell,
   .footer-shell {
@@ -3059,7 +3082,8 @@ body.modal-open {
   }
 
   .reserve-summary-lines {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-columns: 1fr;
+    gap: 8px;
   }
 
   .reserve-summary-top {
@@ -3071,12 +3095,36 @@ body.modal-open {
   }
 
   .reserve-summary-line {
-    min-height: 50px;
-    padding: 11px 12px;
+    min-height: 0;
+    padding: 12px 14px;
+    border-radius: 16px;
+    gap: 12px;
+  }
+
+  .reserve-summary-line span {
+    font-size: 0.98rem;
+  }
+
+  .reserve-summary-line small {
+    font-size: 0.76rem;
+  }
+
+  .reserve-summary-line strong {
+    font-size: 1rem;
   }
 
   .reserve-summary-total {
-    padding: 16px;
+    padding: 16px 18px;
+    gap: 12px;
+  }
+
+  .reserve-summary-total span {
+    font-size: 0.9rem;
+    line-height: 1.2;
+  }
+
+  .reserve-summary-total strong {
+    font-size: 1.55rem;
   }
 
   .calendar-days {

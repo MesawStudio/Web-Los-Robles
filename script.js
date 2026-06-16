@@ -529,6 +529,7 @@ function setReserveStatus(status) {
   const statusView = reserveDialog.querySelector('.reserve-status-view');
   const isIdle = status === 'idle';
 
+  if (!isIdle) reserveDialog.scrollTo({ top: 0, behavior: 'auto' });
   reserveDialog.classList.toggle('is-sending', status === 'sending');
   reserveDialog.classList.toggle('is-sent', status === 'sent');
   reserveDialog.classList.toggle('is-send-error', status === 'error');
