@@ -312,6 +312,7 @@ function setReserveSummaryView(isSummaryOpen) {
   if (reserveFormView) reserveFormView.hidden = isSummaryOpen;
   if (reserveSummaryView) reserveSummaryView.hidden = !isSummaryOpen;
   reserveDialog?.classList.toggle('is-summary-open', isSummaryOpen);
+  reserveModal?.classList.toggle('is-summary-open', isSummaryOpen);
   if (isSummaryOpen) updateReserveSummary();
   updateReserveActionPosition();
 }
@@ -452,6 +453,7 @@ function clearReserveRequiredFeedback() {
     input.classList.remove('is-required-missing');
   });
   reserveDialog?.classList.remove('has-required-warning');
+  reserveModal?.classList.remove('has-required-warning');
   if (reserveRequiredWarning) reserveRequiredWarning.hidden = true;
   if (reserveSuccess?.classList.contains('is-error')) {
     reserveSuccess.hidden = true;
@@ -510,6 +512,7 @@ function showReserveValidationFeedback() {
 
   setReserveFeedback(getReserveValidationMessage(missingFields), true);
   reserveDialog?.classList.toggle('has-required-warning', missingFields.length > 0);
+  reserveModal?.classList.toggle('has-required-warning', missingFields.length > 0);
   if (reserveRequiredWarning) {
     reserveRequiredWarning.textContent = missingFields.some((field) => field.reason === 'invalid-email')
       ? 'Revise el email'
@@ -529,6 +532,9 @@ function setReserveStatus(status) {
   reserveDialog.classList.toggle('is-sending', status === 'sending');
   reserveDialog.classList.toggle('is-sent', status === 'sent');
   reserveDialog.classList.toggle('is-send-error', status === 'error');
+  reserveModal?.classList.toggle('is-sending', status === 'sending');
+  reserveModal?.classList.toggle('is-sent', status === 'sent');
+  reserveModal?.classList.toggle('is-send-error', status === 'error');
 
   if (statusView) {
     statusView.hidden = isIdle;

@@ -1598,7 +1598,7 @@ h3 {
 }
 
 .reserve-cart-warning[hidden],
-.reserve-dialog:not(.has-required-warning) .reserve-cart-warning {
+.reserve-modal:not(.has-required-warning) .reserve-cart-warning {
   display: none;
 }
 
@@ -1623,7 +1623,7 @@ h3 {
   white-space: nowrap;
 }
 
-.reserve-dialog.is-summary-open .reserve-cart-edit {
+.reserve-modal.is-summary-open .reserve-cart-edit {
   display: inline-flex;
 }
 
@@ -1658,7 +1658,7 @@ h3 {
   white-space: nowrap;
 }
 
-.reserve-dialog.is-summary-open .reserve-cart-toggle {
+.reserve-modal.is-summary-open .reserve-cart-toggle {
   position: fixed;
   right: max(28px, calc((100vw - 1160px) / 2));
   top: auto;
@@ -1674,16 +1674,16 @@ h3 {
   color: var(--paper-strong);
 }
 
-.reserve-dialog.is-summary-open .vehicle-total-icon,
-.reserve-dialog.is-summary-open .vehicle-total-amount {
+.reserve-modal.is-summary-open .vehicle-total-icon,
+.reserve-modal.is-summary-open .vehicle-total-amount {
   display: none;
 }
 
-.reserve-dialog.is-summary-open .reserve-cart-submit {
+.reserve-modal.is-summary-open .reserve-cart-submit {
   display: inline-flex;
 }
 
-.reserve-dialog.is-summary-open .reserve-cart-edit {
+.reserve-modal.is-summary-open .reserve-cart-edit {
   position: fixed;
   right: calc(max(28px, calc((100vw - 1160px) / 2)) + 280px);
   top: auto;
@@ -1705,6 +1705,12 @@ h3 {
 
 .reserve-summary-view .reserve-submit {
   display: none;
+}
+
+.reserve-modal.is-sending .reserve-cart-toggle,
+.reserve-modal.is-sent .reserve-cart-toggle,
+.reserve-modal.is-send-error .reserve-cart-toggle {
+  display: none !important;
 }
 
 .date-block {
@@ -2715,7 +2721,7 @@ body.modal-open {
     bottom: 18px;
   }
 
-  .reserve-dialog.is-summary-open .reserve-cart-toggle {
+  .reserve-modal.is-summary-open .reserve-cart-toggle {
     position: fixed;
     top: auto;
     right: max(18px, calc((100vw - 760px) / 2));
@@ -2730,7 +2736,7 @@ body.modal-open {
     justify-content: center;
   }
 
-  .reserve-dialog.is-summary-open .reserve-cart-edit {
+  .reserve-modal.is-summary-open .reserve-cart-edit {
     position: fixed;
     top: auto;
     right: calc(max(18px, calc((100vw - 760px) / 2)) + 182px);
@@ -2945,7 +2951,7 @@ body.modal-open {
 
   .reserve-close {
     position: fixed;
-    top: 26px;
+    top: 60px;
     right: 26px;
     width: 24px;
     height: 24px;
@@ -3001,7 +3007,7 @@ body.modal-open {
     font-size: 0.84rem;
   }
 
-  .reserve-dialog.is-summary-open .reserve-cart-toggle {
+  .reserve-modal.is-summary-open .reserve-cart-toggle {
     display: inline-flex;
     gap: 8px;
     justify-content: center;
@@ -3017,16 +3023,16 @@ body.modal-open {
     max-height: 54px;
   }
 
-  .reserve-dialog.is-summary-open .vehicle-total-icon,
-  .reserve-dialog.is-summary-open .vehicle-total-amount {
+  .reserve-modal.is-summary-open .vehicle-total-icon,
+  .reserve-modal.is-summary-open .vehicle-total-amount {
     display: none;
   }
 
-  .reserve-dialog.is-summary-open .reserve-cart-submit {
+  .reserve-modal.is-summary-open .reserve-cart-submit {
     display: inline-flex;
   }
 
-  .reserve-dialog.is-summary-open .reserve-cart-edit {
+  .reserve-modal.is-summary-open .reserve-cart-edit {
     position: fixed;
     right: 190px;
     top: auto;
