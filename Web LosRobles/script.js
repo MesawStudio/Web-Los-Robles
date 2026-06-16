@@ -33,6 +33,7 @@ const reserveSummaryCloseButtons = document.querySelectorAll('[data-close-reserv
 const reserveRequiredWarning = document.querySelector('[data-reserve-required-warning="true"]');
 const reservePricedInputs = document.querySelectorAll('[data-price]');
 const counterActions = document.querySelectorAll('[data-counter-action]');
+const vehicleQuantityActions = document.querySelectorAll('[data-vehicle-quantity]');
 const reserveSubmitButton = document.querySelector('.reserve-submit');
 
 const COOKIE_STORAGE_KEY = 'losrobles_cookie_choice_v1';
@@ -60,6 +61,7 @@ let carouselLoopDistance = 0;
 let calendarVisibleMonth = new Date(new Date().getFullYear(), new Date().getMonth(), 1);
 let selectedStartDate = null;
 let selectedEndDate = null;
+let appInitialized = false;
 
 function updateHeaderTone() {
   if (!header || toneSections.length === 0) return;
@@ -132,6 +134,17 @@ function startCarouselLoop() {
   carouselFrame = window.requestAnimationFrame(stepCarousel);
 }
 
+function initializeApp() {
+  if (appInitialized) return;
+  appInitialized = true;
+  updateScrollState();
+  startCarouselLoop();
+  setDateMode(document.querySelector('input[name="date_mode"]:checked')?.value ?? 'exact');
+  renderCalendar();
+  applyCookieChoice(getStoredCookieChoice());
+  syncReserveFormState();
+}
+
 function setDateMode(mode) {
   document.querySelectorAll('[data-date-panel]').forEach((panel) => {
     panel.classList.toggle('is-active', panel.dataset.datePanel === mode);
@@ -158,6 +171,17 @@ function escapeHtml(value) {
 
 function getCounterInput(name) {
   return reserveForm?.querySelector(`input[name="${name}"]`);
+}
+
+function getVehicleQuantity(input) {
+  const card = input.closest('.vehicle-card');
+  const count = Number(card?.querySelector('[data-vehicle-count="true"]')?.textContent || 1);
+  return Math.max(1, count);
+}
+
+function setVehicleQuantity(card, quantity) {
+  const count = card?.querySelector('[data-vehicle-count="true"]');
+  if (count) count.textContent = String(Math.max(1, quantity));
 }
 
 function getReserveFieldValue(selector) {
@@ -238,7 +262,12 @@ function getReserveLineItems() {
   reserveForm.querySelectorAll('input[name="vehicle_items"]:checked').forEach((input) => {
     if (!(input instanceof HTMLInputElement)) return;
     const dailyAmount = Number(input.dataset.price || 0);
-    lines.push({ label: VEHICLE_LABELS[input.value] || input.value, detail: `${formatEuro(dailyAmount)} x ${days} día${days === 1 ? '' : 's'}`, amount: dailyAmount * days });
+    const quantity = getVehicleQuantity(input);
+    lines.push({
+      label: VEHICLE_LABELS[input.value] || input.value,
+      detail: `${quantity} x ${formatEuro(dailyAmount)} x ${days} día${days === 1 ? '' : 's'}`,
+      amount: quantity * dailyAmount * days,
+    });
   });
 
   const waterElectricity = reserveForm.querySelector('input[name="water_electricity"]');
@@ -312,7 +341,15 @@ function syncReserveFormState() {
 }
 
 function getCheckedValues(name) {
-  return Array.from(reserveForm?.querySelectorAll(`input[name="${name}"]:checked`) || []).map((input) => input.value);
+  return Array.from(reserveForm?.querySelectorAll(`input[name="${name}"]:checked`) || []).map((input) => {
+    if (name === 'vehicle_items' && input instanceof HTMLInputElement) {
+      const quantity = getVehicleQuantity(input);
+      const label = VEHICLE_LABELS[input.value] || input.value;
+      return quantity > 1 ? `${label} x ${quantity}` : label;
+    }
+
+    return input.value;
+  });
 }
 
 function buildReservationSummary() {
@@ -519,6 +556,7 @@ function updateReserveActionPosition() {
 
 function resetReserveFormUi(options = {}) {
   reserveForm?.reset();
+  document.querySelectorAll('.vehicle-card').forEach((card) => setVehicleQuantity(card, 1));
   const adultsInput = getCounterInput('adults');
   const childrenInput = getCounterInput('children');
   const petsInput = getCounterInput('pets');
@@ -840,7 +878,31 @@ counterActions.forEach((button) => {
 });
 
 reservePricedInputs.forEach((input) => {
-  input.addEventListener('change', updateReserveTotal);
+  input.addEventListener('change', () => {
+    if (input.name === 'vehicle_items' && input instanceof HTMLInputElement && input.checked) {
+      setVehicleQuantity(input.closest('.vehicle-card'), getVehicleQuantity(input));
+    }
+
+    updateReserveTotal();
+  });
+});
+
+vehicleQuantityActions.forEach((button) => {
+  button.addEventListener('click', (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+
+    const card = button.closest('.vehicle-card');
+    const input = card?.querySelector('input[name="vehicle_items"]');
+    const count = card?.querySelector('[data-vehicle-count="true"]');
+    if (!(input instanceof HTMLInputElement) || !count) return;
+
+    input.checked = true;
+    const currentValue = Number(count.textContent || 1);
+    const direction = button.dataset.vehicleQuantity === 'increase' ? 1 : -1;
+    setVehicleQuantity(card, Math.max(1, currentValue + direction));
+    updateReserveTotal();
+  });
 });
 
 getRequiredContactInputs().forEach((input) => {
@@ -901,11 +963,13 @@ window.addEventListener('scroll', updateScrollState, { passive: true });
 window.addEventListener('resize', updateScrollState);
 window.addEventListener('resize', startCarouselLoop);
 window.addEventListener('resize', updateReserveActionPosition);
+if (document.readyState === 'loading') {
+  window.addEventListener('DOMContentLoaded', initializeApp);
+} else {
+  initializeApp();
+}
+
 window.addEventListener('load', () => {
-  updateScrollState();
-  startCarouselLoop();
-  setDateMode(document.querySelector('input[name="date_mode"]:checked')?.value ?? 'exact');
-  renderCalendar();
-  applyCookieChoice(getStoredCookieChoice());
-  syncReserveFormState();
+  initializeApp();
+  updateCarouselLoop();
 });

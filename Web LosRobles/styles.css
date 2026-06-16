@@ -1350,6 +1350,50 @@ h3 {
   pointer-events: none;
 }
 
+.vehicle-quantity {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 3;
+  display: none;
+  align-items: center;
+  gap: 4px;
+  min-height: 32px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--paper-strong);
+  color: var(--gold-deep);
+  box-shadow: 0 10px 24px rgba(10, 11, 12, 0.16);
+}
+
+.vehicle-quantity button {
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(196, 106, 45, 0.12);
+  color: var(--gold-deep);
+  font: inherit;
+  font-size: 0.88rem;
+  font-weight: 900;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.vehicle-quantity span {
+  min-width: 22px;
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.vehicle-card:has(input:checked) .vehicle-quantity {
+  display: inline-flex;
+}
+
 .vehicle-card:has(input:checked),
 .toggle-chip:has(input:checked) {
   border-color: rgba(196, 106, 45, 0.44);
@@ -2681,8 +2725,8 @@ body.modal-open {
   .reserve-dialog {
     width: min(100%, calc(100vw - 36px));
     height: auto;
-    max-height: calc(100svh - 120px);
-    padding: 0 20px 104px;
+    max-height: calc(100svh - 112px);
+    padding: 0 16px 88px;
     border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 28px;
   }
@@ -2769,8 +2813,8 @@ body.modal-open {
   }
 
   .reserve-dialog-copy {
-    margin: 0 -20px 24px;
-    padding: 24px 58px 22px 20px;
+    margin: 0 -16px 18px;
+    padding: 22px 54px 20px 16px;
     border-radius: 0;
   }
 
@@ -2787,6 +2831,12 @@ body.modal-open {
     grid-template-columns: 1fr;
   }
 
+  .date-mode,
+  .flex-grid,
+  .flex-grid-months {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .reserve-form {
     gap: 24px;
   }
@@ -2797,11 +2847,42 @@ body.modal-open {
   }
 
   .form-block {
-    padding: 24px;
+    padding: 16px;
+    border-radius: 20px;
   }
 
   .calendar-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .date-block {
+    min-height: auto;
+    padding-top: 16px;
+  }
+
+  .calendar-shell {
+    gap: 8px;
+  }
+
+  .calendar-toolbar {
+    grid-template-columns: 34px minmax(0, 1fr) 34px;
+    gap: 6px;
+  }
+
+  .calendar-selection {
+    min-height: 36px;
+    padding: 0 10px;
+    font-size: 0.72rem;
+  }
+
+  .calendar-month {
+    padding: 12px;
+    border-radius: 18px;
+  }
+
+  .calendar-weekdays,
+  .calendar-days {
+    gap: 4px;
   }
 
   .vehicle-card {
@@ -2850,7 +2931,7 @@ body.modal-open {
     position: fixed;
     top: auto;
     right: 14px;
-    bottom: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
     z-index: 170;
     min-width: 122px;
     min-height: 54px;
@@ -2885,6 +2966,7 @@ body.modal-open {
     gap: 8px;
     justify-content: center;
     right: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
     transform: none;
     background: var(--gold);
     color: var(--paper-strong);
@@ -2908,7 +2990,7 @@ body.modal-open {
     position: fixed;
     right: 190px;
     top: auto;
-    bottom: 14px;
+    bottom: max(14px, env(safe-area-inset-bottom));
     width: 92px;
     height: 54px;
     min-height: 54px;
@@ -2952,7 +3034,7 @@ body.modal-open {
   }
 
   .calendar-days {
-    grid-auto-rows: minmax(32px, 1fr);
+    grid-auto-rows: minmax(30px, 1fr);
   }
 
   .faq-list {
