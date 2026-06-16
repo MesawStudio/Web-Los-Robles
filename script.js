@@ -904,9 +904,17 @@ vehicleQuantityActions.forEach((button) => {
     const count = card?.querySelector('[data-vehicle-count="true"]');
     if (!(input instanceof HTMLInputElement) || !count) return;
 
-    input.checked = true;
     const currentValue = Number(count.textContent || 1);
     const direction = button.dataset.vehicleQuantity === 'increase' ? 1 : -1;
+
+    if (direction < 0 && currentValue <= 1) {
+      input.checked = false;
+      setVehicleQuantity(card, 1);
+      updateReserveTotal();
+      return;
+    }
+
+    input.checked = true;
     setVehicleQuantity(card, Math.max(1, currentValue + direction));
     updateReserveTotal();
   });
