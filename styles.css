@@ -1347,6 +1347,7 @@ h3 {
 
 .vehicle-card {
   position: relative;
+  isolation: isolate;
   display: block;
   min-height: 142px;
   height: 100%;
@@ -1463,18 +1464,26 @@ h3 {
 .vehicle-icon {
   position: absolute;
   inset: 0;
+  z-index: 0;
   display: grid;
   place-items: center;
   padding: 22px 18px 22px;
+  opacity: 1;
+  visibility: visible;
   pointer-events: none;
 }
 
 .vehicle-icon img {
+  display: block;
   width: min(196px, 84%);
   height: auto;
+  max-height: 82%;
   object-fit: contain;
   object-position: center;
+  opacity: 1;
+  visibility: visible;
   filter: saturate(0.94);
+  transform: translateZ(0);
 }
 
 .vehicle-card-tienda .vehicle-icon img {
@@ -2335,7 +2344,8 @@ body.modal-open {
     position: fixed;
     top: max(28px, calc((100svh - min(calc(100svh - 138px), 920px)) / 2 + 20px));
     right: max(34px, calc((100vw - 1160px) / 2 + 28px));
-    z-index: 180;
+    transform: rotate(45deg);
+    z-index: 1001;
   }
 
   .reserve-dialog-copy {
@@ -2935,12 +2945,13 @@ body.modal-open {
 
   .reserve-close {
     position: fixed;
-    top: 32px;
-    right: 34px;
+    top: 26px;
+    right: 26px;
     width: 24px;
     height: 24px;
     font-size: 0.92rem;
-    z-index: 180;
+    transform: rotate(45deg);
+    z-index: 1001;
   }
 
   .reserve-dialog-copy {
@@ -2953,12 +2964,15 @@ body.modal-open {
     white-space: nowrap;
   }
 
-  .reserve-cart-toggle {
+  .reserve-modal.is-open .reserve-cart-toggle {
     position: fixed;
     top: auto;
-    right: 14px;
-    bottom: max(14px, env(safe-area-inset-bottom));
-    z-index: 170;
+    right: 14px !important;
+    bottom: max(14px, env(safe-area-inset-bottom)) !important;
+    z-index: 1000;
+    display: inline-flex;
+    opacity: 1;
+    visibility: visible;
     min-width: 122px;
     min-height: 54px;
     padding: 0 16px;
