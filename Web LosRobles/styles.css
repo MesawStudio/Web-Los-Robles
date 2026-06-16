@@ -2315,6 +2315,13 @@ body.modal-open {
     overflow-y: auto;
   }
 
+  .reserve-close {
+    position: fixed;
+    top: max(28px, calc((100svh - min(calc(100svh - 138px), 920px)) / 2 + 20px));
+    right: max(34px, calc((100vw - 1160px) / 2 + 28px));
+    z-index: 180;
+  }
+
   .reserve-dialog-copy {
     position: sticky;
   }
@@ -2911,10 +2918,13 @@ body.modal-open {
   }
 
   .reserve-close {
-    top: 38px;
+    position: fixed;
+    top: 32px;
+    right: 34px;
     width: 24px;
     height: 24px;
     font-size: 0.92rem;
+    z-index: 180;
   }
 
   .reserve-dialog-copy {
