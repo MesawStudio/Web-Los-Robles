@@ -17,44 +17,85 @@ function escapeHtml(value = '') {
   })[char]);
 }
 
+function compactValue(value, fallback = 'No indicado') {
+  if (value === 0) return '0';
+  const text = String(value || '').trim();
+  return text || fallback;
+}
+
+function detailRows(rows) {
+  return rows
+    .filter(([, value]) => value !== undefined && value !== null && String(value).trim() !== '')
+    .map(([label, value]) => `
+      <tr>
+        <td style="padding:10px 0;border-bottom:1px solid #eadfd3;color:#6b625a;font-size:13px;font-weight:700;letter-spacing:0.04em;text-transform:uppercase;vertical-align:top;">${escapeHtml(label)}</td>
+        <td style="padding:10px 0;border-bottom:1px solid #eadfd3;color:#242628;font-size:16px;font-weight:700;text-align:right;vertical-align:top;white-space:pre-line;">${escapeHtml(value)}</td>
+      </tr>
+    `)
+    .join('');
+}
+
+function section(title, rows, intro = '') {
+  return `
+    <div style="margin:0 0 18px;padding:20px;border:1px solid #eadfd3;border-radius:18px;background:#fffdfa;">
+      <h2 style="margin:0 0 12px;color:#b35f2a;font-size:15px;line-height:1.2;letter-spacing:0.12em;text-transform:uppercase;">${escapeHtml(title)}</h2>
+      ${intro ? `<p style="margin:0 0 12px;color:#5f6469;font-size:14px;line-height:1.5;">${escapeHtml(intro)}</p>` : ''}
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+        ${detailRows(rows)}
+      </table>
+    </div>
+  `;
+}
+
 function buildHtmlEmail(payload) {
   const contact = payload.contact || {};
   const dates = payload.dates || {};
   const selections = payload.selections || {};
   const billing = payload.billing || {};
-
-  const rows = [
-    ['Nombre', contact.fullName],
-    ['Email', contact.email],
-    ['Telefono', contact.phone || 'No indicado'],
-    ['Fechas', `${dates.mode || 'Sin indicar'} · ${dates.detail || 'Sin detalle'}`],
-    ['Adultos', selections.adults],
-    ['Ninos (3-8)', selections.children],
-    ['Mascotas', selections.pets],
-    ['Vehiculos / elementos', selections.vehicles || 'Sin seleccionar'],
-    ['Agua y luz', selections.waterElectricity || 'No'],
-    ['Comentarios', selections.notes || 'Sin comentarios'],
-    ['Dias facturados', billing.chargedDays],
-    ['Total estimado', billing.total],
-  ];
+  const hasNotes = String(selections.notes || '').trim();
+  const total = compactValue(billing.total, 'Sin calcular');
 
   return `
-    <div style="margin:0;padding:0;background:#f6f2eb;font-family:Arial,sans-serif;color:#242628;">
-      <div style="max-width:720px;margin:0 auto;padding:28px;">
-        <div style="background:#c46a2d;color:#fffdf9;border-radius:22px 22px 0 0;padding:26px 28px;">
-          <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;font-weight:700;">Camping Los Robles</p>
-          <h1 style="margin:0;font-size:30px;line-height:1.1;">Nueva solicitud de reserva</h1>
-        </div>
-        <div style="background:#fffdf9;border:1px solid rgba(36,38,40,0.12);border-top:0;border-radius:0 0 22px 22px;padding:24px 28px;">
-          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
-            ${rows.map(([label, value]) => `
-              <tr>
-                <td style="width:38%;padding:12px 0;border-bottom:1px solid rgba(36,38,40,0.1);color:#5f6469;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.06em;vertical-align:top;">${escapeHtml(label)}</td>
-                <td style="padding:12px 0;border-bottom:1px solid rgba(36,38,40,0.1);font-size:16px;font-weight:700;white-space:pre-line;vertical-align:top;">${escapeHtml(value)}</td>
-              </tr>
-            `).join('')}
-          </table>
-          <p style="margin:22px 0 0;color:#5f6469;font-size:13px;line-height:1.6;">Esta solicitud se ha enviado desde la web. Revisad disponibilidad antes de confirmar la reserva o enviar enlace de pago.</p>
+    <div style="margin:0;padding:0;background:#f6f2eb;font-family:Arial,Helvetica,sans-serif;color:#242628;">
+      <div style="max-width:760px;margin:0 auto;padding:28px 16px;">
+        <div style="overflow:hidden;border-radius:24px;background:#fffdf9;border:1px solid #eadfd3;box-shadow:0 18px 48px rgba(36,38,40,0.12);">
+          <div style="background:#c46a2d;color:#fffdf9;padding:28px 30px;">
+            <p style="margin:0 0 8px;font-size:12px;letter-spacing:0.16em;text-transform:uppercase;font-weight:700;">Camping Los Robles</p>
+            <h1 style="margin:0;font-size:32px;line-height:1.1;">Nueva solicitud de reserva</h1>
+            <p style="margin:12px 0 0;font-size:16px;line-height:1.5;color:#fff4eb;">Revisad disponibilidad antes de confirmar la reserva o enviar el enlace de pago.</p>
+          </div>
+          <div style="padding:24px 30px 30px;background:#fff8ef;">
+            <div style="margin:0 0 18px;padding:18px 20px;border-radius:18px;background:#242628;color:#fffdf9;">
+              <table role="presentation" width="100%" cellspacing="0" cellpadding="0" style="border-collapse:collapse;">
+                <tr>
+                  <td style="font-size:13px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:#d8d2cb;">Total estimado</td>
+                  <td style="font-size:30px;font-weight:800;text-align:right;color:#fffdf9;">${escapeHtml(total)}</td>
+                </tr>
+              </table>
+            </div>
+            ${section('Contacto', [
+              ['Nombre', compactValue(contact.fullName)],
+              ['Email', compactValue(contact.email)],
+              ['Teléfono', compactValue(contact.phone)],
+            ])}
+            ${section('Fechas', [
+              ['Tipo', compactValue(dates.mode, 'Sin indicar')],
+              ['Detalle', compactValue(dates.detail, 'Sin detalle')],
+            ])}
+            ${section('Selecciones', [
+              ['Adultos', compactValue(selections.adults, '0')],
+              ['Niños (3-8)', compactValue(selections.children, '0')],
+              ['Mascotas', compactValue(selections.pets, '0')],
+              ['Vehículos / elementos', compactValue(selections.vehicles, 'Sin seleccionar')],
+              ['Agua y luz', compactValue(selections.waterElectricity, 'No')],
+              ...(hasNotes ? [['Comentarios', selections.notes]] : []),
+            ])}
+            ${section('Facturación', [
+              ['Días facturados', compactValue(billing.chargedDays, '0')],
+              ['Precio total', total],
+            ])}
+            <p style="margin:20px 0 0;color:#6b625a;font-size:13px;line-height:1.6;">Solicitud enviada desde la web. Este mensaje no confirma la reserva automáticamente.</p>
+          </div>
         </div>
       </div>
     </div>
