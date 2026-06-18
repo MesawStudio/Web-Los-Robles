@@ -39,7 +39,7 @@ const reserveSubmitButton = document.querySelector('.reserve-submit');
 const COOKIE_STORAGE_KEY = 'losrobles_cookie_choice_v1';
 const CALENDAR_MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const CALENDAR_DAY_NAMES = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
-const RESERVE_FORM_ENDPOINT = 'https://formsubmit.co/ajax/d7364b2bb06e2ce52e961dcac923e7f1';
+const RESERVE_FORM_ENDPOINT = '/api/reserva';
 const RESERVE_PRICES = {
   adults: 8.9,
   children: 6.5,
