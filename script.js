@@ -31,6 +31,8 @@ const reserveSummaryView = document.querySelector('[data-reserve-view="summary"]
 const reserveSummaryOpenButtons = document.querySelectorAll('[data-open-reserve-summary="true"]');
 const reserveSummaryCloseButtons = document.querySelectorAll('[data-close-reserve-summary="true"]');
 const reserveRequiredWarning = document.querySelector('[data-reserve-required-warning="true"]');
+const reserveErrorTitle = document.querySelector('[data-reserve-error-title="true"]');
+const reserveErrorMessage = document.querySelector('[data-reserve-error-message="true"]');
 const reservePricedInputs = document.querySelectorAll('[data-price]');
 const counterActions = document.querySelectorAll('[data-counter-action]');
 const vehicleQuantityActions = document.querySelectorAll('[data-vehicle-quantity]');
@@ -40,7 +42,11 @@ const COOKIE_STORAGE_KEY = 'losrobles_cookie_choice_v1';
 const CALENDAR_MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const CALENDAR_DAY_NAMES = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 const OPENING_DATE = new Date(2026, 6, 1);
-const RESERVE_FORM_ENDPOINT = 'https://formsubmit.co/ajax/d7364b2bb06e2ce52e961dcac923e7f1';
+const RESERVE_FORM_ENDPOINT = '/api/reserva';
+const RESERVE_DEFAULT_ERROR_TITLE = 'Revisa la conexión e inténtalo de nuevo.';
+const RESERVE_DEFAULT_ERROR_MESSAGE = 'La solicitud no se ha enviado. Puedes volver al formulario y probar de nuevo en unos segundos.';
+const RESERVE_LIMIT_ERROR_TITLE = 'Servicio de solicitudes saturado por hoy.';
+const RESERVE_LIMIT_ERROR_MESSAGE = 'Sentimos las molestias. Hemos alcanzado el límite diario de solicitudes online. Por favor, inténtalo de nuevo mañana o contacta directamente con el camping por teléfono o email.';
 const RESERVE_PRICES = {
   adults: 8.9,
   children: 6.5,
@@ -385,9 +391,8 @@ function buildReservationSummary() {
   ].join('\n');
 }
 
-function buildSpanishSubmissionData() {
-  const formData = new FormData();
-  if (!reserveForm) return formData;
+function buildReservationPayload() {
+  if (!reserveForm) return {};
 
   const fullName = reserveForm.querySelector('input[name="full_name"]')?.value.trim() || 'Solicitud web';
   const email = reserveForm.querySelector('input[name="email"]')?.value.trim() || '';
@@ -420,19 +425,48 @@ function buildSpanishSubmissionData() {
   if (phone) contactLines.push(`Teléfono: ${phone}`);
   if (notes) selectionLines.push(`Comentarios: ${notes}`);
 
-  formData.append('_subject', `Nueva solicitud de reserva · ${fullName}`);
-  formData.append('_template', 'box');
-  formData.append('_captcha', 'false');
-  formData.append('_replyto', email);
-  formData.append('Contacto:', contactLines.join('\n'));
-  formData.append('Fechas:', dateLines.join('\n'));
-  formData.append('Selecciones:', selectionLines.join('\n'));
-  formData.append('Facturación:', [
+  return {
+    subject: `Nueva solicitud de reserva · ${fullName}`,
+    origin: reserveForm.querySelector('input[name="form_origin"]')?.value || 'Landing Lago de Sanabria',
+    honeypot: reserveForm.querySelector('input[name="_honey"]')?.value || '',
+    contact: {
+      fullName,
+      email,
+      phone: phone || '',
+    },
+    dates: {
+      mode: dateMode === 'exact' ? 'Fechas exactas' : 'Fechas flexibles',
+      detail: getReserveDateSummary(),
+    },
+    selections: {
+      adults,
+      children,
+      pets,
+      vehicles: selectedVehicles,
+      waterElectricity: hasWaterElectricity,
+      notes: notes || '',
+    },
+    billing: {
+      chargedDays: getReserveDayCount(),
+      total: reserveTotal?.textContent || formatEuro(getReserveTotalValue()),
+    },
+    plainText: [
+      'Contacto:',
+      contactLines.join('\n'),
+      '',
+      'Fechas:',
+      dateLines.join('\n'),
+      '',
+      'Selecciones:',
+      selectionLines.join('\n'),
+      '',
+      'Facturación:',
+      [
     `Días facturados: ${getReserveDayCount()}`,
     `Precio total: ${reserveTotal?.textContent || formatEuro(getReserveTotalValue())}`,
-  ].join('\n'));
-
-  return formData;
+      ].join('\n'),
+    ].join('\n'),
+  };
 }
 
 function setReserveFeedback(message, isError = false) {
@@ -525,10 +559,18 @@ function showReserveValidationFeedback() {
   return missingFields.length === 0;
 }
 
-function setReserveStatus(status) {
+function setReserveStatus(status, options = {}) {
   if (!reserveDialog) return;
   const statusView = reserveDialog.querySelector('.reserve-status-view');
   const isIdle = status === 'idle';
+
+  if (reserveErrorTitle) {
+    reserveErrorTitle.textContent = options.errorTitle || RESERVE_DEFAULT_ERROR_TITLE;
+  }
+
+  if (reserveErrorMessage) {
+    reserveErrorMessage.textContent = options.errorMessage || RESERVE_DEFAULT_ERROR_MESSAGE;
+  }
 
   if (!isIdle) reserveDialog.scrollTo({ top: 0, behavior: 'auto' });
   reserveDialog.classList.toggle('is-sending', status === 'sending');
@@ -946,28 +988,39 @@ reserveForm?.addEventListener('submit', (event) => {
   }
 
   clearReserveRequiredFeedback();
-  const formData = buildSpanishSubmissionData();
+  const payload = buildReservationPayload();
 
   reserveSubmitButton?.setAttribute('disabled', 'disabled');
   setReserveStatus('sending');
 
   fetch(RESERVE_FORM_ENDPOINT, {
     method: 'POST',
-    body: formData,
     headers: {
+      'Content-Type': 'application/json',
       Accept: 'application/json',
     },
+    body: JSON.stringify(payload),
   })
     .then(async (response) => {
       const data = await response.json().catch(() => ({}));
-      if (!response.ok || data.success === 'false') {
-        throw new Error(data.message || 'No se pudo enviar la solicitud.');
+      if (!response.ok || data.success === false) {
+        const error = new Error(data.message || 'No se pudo enviar la solicitud.');
+        error.code = data.code;
+        throw error;
       }
 
       resetReserveFormUi({ keepStatus: true });
       setReserveStatus('sent');
     })
-    .catch(() => {
+    .catch((error) => {
+      if (error.code === 'daily_limit' || error.code === 'rate_limited') {
+        setReserveStatus('error', {
+          errorTitle: RESERVE_LIMIT_ERROR_TITLE,
+          errorMessage: RESERVE_LIMIT_ERROR_MESSAGE,
+        });
+        return;
+      }
+
       setReserveStatus('error');
     })
     .finally(() => {
