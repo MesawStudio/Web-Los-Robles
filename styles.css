@@ -81,22 +81,6 @@ select {
   background: linear-gradient(90deg, var(--gold), #d98b4d);
 }
 
-.site-version {
-  position: fixed;
-  top: 6px;
-  right: 8px;
-  z-index: 999;
-  padding: 3px 7px;
-  border-radius: 999px;
-  background: rgba(23, 24, 26, 0.72);
-  color: var(--paper-strong);
-  font-size: 0.68rem;
-  font-weight: 900;
-  line-height: 1;
-  letter-spacing: 0.04em;
-  pointer-events: none;
-}
-
 .site-header {
   position: fixed;
   top: 22px;
@@ -399,12 +383,24 @@ h3 {
 }
 
 .gallery-disclaimer {
-  width: min(980px, calc(100% - 40px));
-  margin: 0 auto 22px;
-  color: rgba(36, 38, 40, 0.62);
-  font-size: clamp(0.78rem, 1vw, 0.92rem);
-  line-height: 1.55;
+  width: min(920px, calc(100% - 48px));
+  margin: 0 auto 26px;
+  padding: 14px 22px;
+  border: 1px solid rgba(196, 106, 45, 0.18);
+  border-radius: 999px;
+  background: rgba(255, 253, 249, 0.72);
+  box-shadow: 0 18px 42px rgba(36, 38, 40, 0.06);
+  color: rgba(36, 38, 40, 0.68);
+  font-size: clamp(0.82rem, 0.95vw, 0.94rem);
+  font-weight: 600;
+  line-height: 1.5;
   text-align: center;
+}
+
+.gallery-disclaimer span {
+  display: block;
+  max-width: 760px;
+  margin: 0 auto;
 }
 
 .carousel-track {
