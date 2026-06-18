@@ -1546,16 +1546,16 @@ h3 {
   width: min(150px, 64%);
 }
 
-.vehicle-card-furgo .vehicle-icon img {
-  width: min(170px, 72%);
-}
-
 .vehicle-card-camper .vehicle-icon img {
   width: min(176px, 75%);
 }
 
 .vehicle-card-caravana .vehicle-icon img {
   width: min(184px, 78%);
+}
+
+.vehicle-card-extra .vehicle-icon img {
+  width: min(154px, 66%);
 }
 
 .vehicle-footer {

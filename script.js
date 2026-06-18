@@ -49,10 +49,10 @@ const RESERVE_PRICES = {
 const VEHICLE_LABELS = {
   tienda: 'Tienda',
   moto: 'Moto',
-  coche: 'Coche',
-  furgo: 'Furgo',
-  camper: 'Camper',
+  coche: 'Automóvil',
+  camper: 'Autocaravana / coche cama / Camper',
   caravana: 'Caravana',
+  extra: 'Extras / remolques',
 };
 
 let carouselOffset = 0;
