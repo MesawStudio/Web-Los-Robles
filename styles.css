@@ -398,6 +398,15 @@ h3 {
   overflow: hidden;
 }
 
+.gallery-disclaimer {
+  width: min(980px, calc(100% - 40px));
+  margin: 0 auto 22px;
+  color: rgba(36, 38, 40, 0.62);
+  font-size: clamp(0.78rem, 1vw, 0.92rem);
+  line-height: 1.55;
+  text-align: center;
+}
+
 .carousel-track {
   display: flex;
   width: max-content;
