@@ -280,7 +280,7 @@ function getReserveLineItems() {
   const waterElectricity = reserveForm.querySelector('input[name="water_electricity"]');
   if (waterElectricity instanceof HTMLInputElement && waterElectricity.checked) {
     const dailyAmount = Number(waterElectricity.dataset.price || 0);
-    lines.push({ label: 'Acceso a Agua y Luz', detail: `${formatEuro(dailyAmount)} x ${days} día${days === 1 ? '' : 's'}`, amount: dailyAmount * days, variant: 'utility' });
+    lines.push({ label: 'Acceso a luz', detail: `${formatEuro(dailyAmount)} x ${days} día${days === 1 ? '' : 's'}`, amount: dailyAmount * days, variant: 'utility' });
   }
 
   return lines;
@@ -383,7 +383,7 @@ function buildReservationSummary() {
     `Niños (3-8): ${children}`,
     `Mascotas: ${pets}`,
     `Vehículos / elementos: ${selectedVehicles}`,
-    `Agua y luz: ${hasWaterElectricity}`,
+    `Acceso a luz: ${hasWaterElectricity}`,
     `Fechas: ${getReserveDateSummary()}`,
     `Días facturados: ${getReserveDayCount()}`,
     `Total estimado: ${reserveTotal?.textContent || ''}`,
@@ -419,7 +419,7 @@ function buildReservationPayload() {
     `Niños (3-8): ${children}`,
     `Mascotas: ${pets}`,
     `Vehículos / elementos: ${selectedVehicles}`,
-    `Acceso a agua y luz: ${hasWaterElectricity}`,
+    `Acceso a luz: ${hasWaterElectricity}`,
   ];
 
   if (phone) contactLines.push(`Teléfono: ${phone}`);

@@ -87,7 +87,7 @@ function buildHtmlEmail(payload) {
               ['Niños (3-8)', compactValue(selections.children, '0')],
               ['Mascotas', compactValue(selections.pets, '0')],
               ['Vehículos / elementos', compactValue(selections.vehicles, 'Sin seleccionar')],
-              ['Agua y luz', compactValue(selections.waterElectricity, 'No')],
+              ['Acceso a luz', compactValue(selections.waterElectricity, 'No')],
               ...(hasNotes ? [['Comentarios', selections.notes]] : []),
             ])}
             ${section('Facturación', [
