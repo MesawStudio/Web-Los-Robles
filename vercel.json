@@ -1,4 +1,96 @@
 {
+  "redirects": [
+    {
+      "source": "/tarifas-2025",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/tarifas-2025/",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/reservas-contacto",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/reservas-contacto/",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/bar-terraza-restaurante",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/bar-terraza-restaurante/",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/servicios",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/servicios/",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/acceso-lago",
+      "destination": "/#lake-banner",
+      "permanent": true
+    },
+    {
+      "source": "/acceso-lago/",
+      "destination": "/#lake-banner",
+      "permanent": true
+    },
+    {
+      "source": "/contacto",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/contacto/",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/reservas",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/reservas/",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/tarifas",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/tarifas/",
+      "destination": "/#reserve-modal",
+      "permanent": true
+    },
+    {
+      "source": "/restaurante",
+      "destination": "/#faq",
+      "permanent": true
+    },
+    {
+      "source": "/restaurante/",
+      "destination": "/#faq",
+      "permanent": true
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
