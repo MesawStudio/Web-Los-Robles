@@ -21,6 +21,7 @@ const mapFrame = document.querySelector('.footer-map-frame iframe');
 const mapPlaceholder = document.querySelector('[data-map-placeholder="true"]');
 const calendarGrid = document.querySelector('#calendar-grid');
 const calendarRangeLabel = document.querySelector('[data-selected-range="true"]');
+const calendarMinimumNotice = document.querySelector('[data-calendar-minimum-notice="true"]');
 const arrivalInput = document.querySelector('#arrival_date');
 const departureInput = document.querySelector('#departure_date');
 const reserveTotal = document.querySelector('[data-reserve-total="true"]');
@@ -42,6 +43,7 @@ const COOKIE_STORAGE_KEY = 'losrobles_cookie_choice_v1';
 const CALENDAR_MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const CALENDAR_DAY_NAMES = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 const OPENING_DATE = new Date(2026, 6, 1);
+const MIN_RESERVATION_DAYS = 2;
 const RESERVE_FORM_ENDPOINT = '/api/reserva';
 const RESERVE_DEFAULT_ERROR_TITLE = 'Revisa la conexión e inténtalo de nuevo.';
 const RESERVE_DEFAULT_ERROR_MESSAGE = 'La solicitud no se ha enviado. Puedes volver al formulario y probar de nuevo en unos segundos.';
@@ -60,6 +62,7 @@ const VEHICLE_LABELS = {
   caravana: 'Caravana',
   extra: 'Extras / remolques',
 };
+const LIGHT_VEHICLE_TYPES = new Set(['moto', 'coche', 'caravana', 'camper']);
 
 let carouselOffset = 0;
 let carouselLastTime = 0;
@@ -186,6 +189,14 @@ function getVehicleQuantity(input) {
   return Math.max(1, count);
 }
 
+function getSelectedVehicleCount() {
+  if (!reserveForm) return 0;
+
+  return Array.from(reserveForm.querySelectorAll('input[name="vehicle_items"]:checked'))
+    .filter((input) => input instanceof HTMLInputElement && LIGHT_VEHICLE_TYPES.has(input.value))
+    .reduce((total, input) => total + getVehicleQuantity(input), 0);
+}
+
 function setVehicleQuantity(card, quantity) {
   const count = card?.querySelector('[data-vehicle-count="true"]');
   if (count) count.textContent = String(Math.max(1, quantity));
@@ -210,14 +221,14 @@ function getReserveDateSummary() {
 }
 
 function getReserveDayCount() {
-  if (!reserveForm) return 1;
+  if (!reserveForm) return MIN_RESERVATION_DAYS;
 
   const dateMode = reserveForm.querySelector('input[name="date_mode"]:checked')?.value ?? 'exact';
 
   if (dateMode === 'exact') {
-    if (!selectedStartDate || !selectedEndDate) return 1;
+    if (!selectedStartDate || !selectedEndDate) return MIN_RESERVATION_DAYS;
     const msPerDay = 24 * 60 * 60 * 1000;
-    return Math.max(1, Math.round((selectedEndDate - selectedStartDate) / msPerDay));
+    return Math.max(MIN_RESERVATION_DAYS, Math.round((selectedEndDate - selectedStartDate) / msPerDay));
   }
 
   const flexWindow = reserveForm.querySelector('input[name="flex_window"]:checked')?.value;
@@ -228,7 +239,7 @@ function getReserveDayCount() {
     mes: 30,
   };
 
-  return flexibleDays[flexWindow] || 1;
+  return flexibleDays[flexWindow] || MIN_RESERVATION_DAYS;
 }
 
 function getReserveInfoItems() {
@@ -280,7 +291,13 @@ function getReserveLineItems() {
   const waterElectricity = reserveForm.querySelector('input[name="water_electricity"]');
   if (waterElectricity instanceof HTMLInputElement && waterElectricity.checked) {
     const dailyAmount = Number(waterElectricity.dataset.price || 0);
-    lines.push({ label: 'Acceso a luz', detail: `${formatEuro(dailyAmount)} x ${days} día${days === 1 ? '' : 's'}`, amount: dailyAmount * days, variant: 'utility' });
+    const vehicleCount = Math.max(1, getSelectedVehicleCount());
+    lines.push({
+      label: 'Acceso a luz',
+      detail: `${vehicleCount} vehículo${vehicleCount === 1 ? '' : 's'} x ${formatEuro(dailyAmount)} x ${days} días`,
+      amount: vehicleCount * dailyAmount * days,
+      variant: 'utility',
+    });
   }
 
   return lines;
@@ -489,6 +506,7 @@ function clearReserveRequiredFeedback() {
   });
   reserveDialog?.classList.remove('has-required-warning');
   reserveModal?.classList.remove('has-required-warning');
+  calendarMinimumNotice?.classList.remove('is-error');
   if (reserveRequiredWarning) reserveRequiredWarning.hidden = true;
   if (reserveSuccess?.classList.contains('is-error')) {
     reserveSuccess.hidden = true;
@@ -541,6 +559,23 @@ function showReserveValidationFeedback() {
   });
 
   if (!missingFields.length) {
+    const dateMode = reserveForm.querySelector('input[name="date_mode"]:checked')?.value ?? 'exact';
+    const hasValidExactDates = selectedStartDate
+      && selectedEndDate
+      && getReserveDayCount() >= MIN_RESERVATION_DAYS;
+
+    if (dateMode === 'exact' && !hasValidExactDates) {
+      clearReserveRequiredFeedback();
+      calendarMinimumNotice?.classList.add('is-error');
+      setReserveFeedback('Selecciona una fecha de llegada y una salida con una estancia mínima de 2 días.', true);
+      if (reserveRequiredWarning) {
+        reserveRequiredWarning.textContent = 'Selecciona mínimo 2 días';
+        reserveRequiredWarning.hidden = false;
+      }
+      calendarGrid?.scrollIntoView({ block: 'center', behavior: 'smooth' });
+      return false;
+    }
+
     clearReserveRequiredFeedback();
     return true;
   }
@@ -747,16 +782,17 @@ function renderCalendar() {
 
 function onCalendarDateClick(dateValue) {
   const clickedDate = new Date(`${dateValue}T00:00:00`);
+  calendarMinimumNotice?.classList.remove('is-error');
 
   if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
     selectedStartDate = clickedDate;
     selectedEndDate = null;
   } else if (clickedDate < selectedStartDate) {
     selectedStartDate = clickedDate;
-  } else if (clickedDate.toDateString() === selectedStartDate.toDateString()) {
-    selectedEndDate = clickedDate;
   } else {
-    selectedEndDate = clickedDate;
+    const minimumDeparture = new Date(selectedStartDate);
+    minimumDeparture.setDate(minimumDeparture.getDate() + MIN_RESERVATION_DAYS);
+    selectedEndDate = clickedDate < minimumDeparture ? minimumDeparture : clickedDate;
   }
 
   renderCalendar();
@@ -984,6 +1020,11 @@ reserveForm?.addEventListener('submit', (event) => {
     setReserveSummaryView(false);
     showReserveValidationFeedback();
     reserveForm.reportValidity();
+    return;
+  }
+
+  if (!showReserveValidationFeedback()) {
+    setReserveSummaryView(false);
     return;
   }
 

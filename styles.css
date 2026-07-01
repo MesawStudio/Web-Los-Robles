@@ -1861,7 +1861,7 @@ h3 {
 
 .calendar-shell {
   display: grid;
-  grid-template-rows: auto auto minmax(0, 1fr);
+  grid-template-rows: auto minmax(0, 1fr) auto;
   align-content: stretch;
   height: 100%;
   gap: 12px;
@@ -1906,6 +1906,19 @@ h3 {
   gap: 12px;
   min-height: 0;
   width: 100%;
+}
+
+.calendar-minimum-notice {
+  margin: 0;
+  color: var(--anthracite-soft);
+  font-size: 0.76rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+}
+
+.calendar-minimum-notice.is-error {
+  color: #a52e25;
 }
 
 .calendar-month {

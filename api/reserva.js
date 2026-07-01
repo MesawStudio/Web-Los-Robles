@@ -151,8 +151,10 @@ module.exports = async function handler(request, response) {
   }
 
   const contact = payload.contact || {};
+  const billing = payload.billing || {};
   const email = String(contact.email || '').trim();
   const fullName = String(contact.fullName || '').trim();
+  const chargedDays = Number(billing.chargedDays);
 
   if (payload.honeypot) {
     jsonResponse(response, 200, { success: true });
@@ -164,6 +166,15 @@ module.exports = async function handler(request, response) {
       success: false,
       code: 'invalid_request',
       message: 'Faltan datos obligatorios.',
+    });
+    return;
+  }
+
+  if (!Number.isFinite(chargedDays) || chargedDays < 2) {
+    jsonResponse(response, 400, {
+      success: false,
+      code: 'invalid_stay',
+      message: 'La estancia minima es de 2 dias.',
     });
     return;
   }
