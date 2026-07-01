@@ -71,6 +71,7 @@ let carouselLoopDistance = 0;
 let calendarVisibleMonth = new Date(OPENING_DATE.getFullYear(), OPENING_DATE.getMonth(), 1);
 let selectedStartDate = null;
 let selectedEndDate = null;
+let isSelectingEndDate = false;
 let appInitialized = false;
 
 function updateHeaderTone() {
@@ -228,7 +229,7 @@ function getReserveDayCount() {
   if (dateMode === 'exact') {
     if (!selectedStartDate || !selectedEndDate) return MIN_RESERVATION_DAYS;
     const msPerDay = 24 * 60 * 60 * 1000;
-    return Math.max(MIN_RESERVATION_DAYS, Math.round((selectedEndDate - selectedStartDate) / msPerDay));
+    return Math.max(MIN_RESERVATION_DAYS, Math.round((selectedEndDate - selectedStartDate) / msPerDay) + 1);
   }
 
   const flexWindow = reserveForm.querySelector('input[name="flex_window"]:checked')?.value;
@@ -650,6 +651,7 @@ function resetReserveFormUi(options = {}) {
   if (petsInput) petsInput.value = '0';
   selectedStartDate = null;
   selectedEndDate = null;
+  isSelectingEndDate = false;
   calendarVisibleMonth = new Date(OPENING_DATE.getFullYear(), OPENING_DATE.getMonth(), 1);
   setDateMode('exact');
   renderCalendar();
@@ -784,15 +786,20 @@ function onCalendarDateClick(dateValue) {
   const clickedDate = new Date(`${dateValue}T00:00:00`);
   calendarMinimumNotice?.classList.remove('is-error');
 
-  if (!selectedStartDate || (selectedStartDate && selectedEndDate)) {
+  if (!selectedStartDate || !isSelectingEndDate) {
     selectedStartDate = clickedDate;
-    selectedEndDate = null;
+    selectedEndDate = new Date(clickedDate);
+    selectedEndDate.setDate(selectedEndDate.getDate() + MIN_RESERVATION_DAYS - 1);
+    isSelectingEndDate = true;
   } else if (clickedDate < selectedStartDate) {
     selectedStartDate = clickedDate;
+    selectedEndDate = new Date(clickedDate);
+    selectedEndDate.setDate(selectedEndDate.getDate() + MIN_RESERVATION_DAYS - 1);
   } else {
     const minimumDeparture = new Date(selectedStartDate);
-    minimumDeparture.setDate(minimumDeparture.getDate() + MIN_RESERVATION_DAYS);
+    minimumDeparture.setDate(minimumDeparture.getDate() + MIN_RESERVATION_DAYS - 1);
     selectedEndDate = clickedDate < minimumDeparture ? minimumDeparture : clickedDate;
+    isSelectingEndDate = false;
   }
 
   renderCalendar();
