@@ -221,6 +221,21 @@ function getReserveDateSummary() {
   return `${flexWindow} · ${flexMonth}`;
 }
 
+function getInclusiveCalendarDayCount(startDate, endDate) {
+  const startUtc = Date.UTC(
+    startDate.getFullYear(),
+    startDate.getMonth(),
+    startDate.getDate(),
+  );
+  const endUtc = Date.UTC(
+    endDate.getFullYear(),
+    endDate.getMonth(),
+    endDate.getDate(),
+  );
+
+  return Math.round((endUtc - startUtc) / (24 * 60 * 60 * 1000)) + 1;
+}
+
 function getReserveDayCount() {
   if (!reserveForm) return MIN_RESERVATION_DAYS;
 
@@ -228,18 +243,10 @@ function getReserveDayCount() {
 
   if (dateMode === 'exact') {
     if (!selectedStartDate || !selectedEndDate) return MIN_RESERVATION_DAYS;
-    const startUtc = Date.UTC(
-      selectedStartDate.getFullYear(),
-      selectedStartDate.getMonth(),
-      selectedStartDate.getDate(),
+    return Math.max(
+      MIN_RESERVATION_DAYS,
+      getInclusiveCalendarDayCount(selectedStartDate, selectedEndDate),
     );
-    const endUtc = Date.UTC(
-      selectedEndDate.getFullYear(),
-      selectedEndDate.getMonth(),
-      selectedEndDate.getDate(),
-    );
-    const elapsedDays = Math.round((endUtc - startUtc) / (24 * 60 * 60 * 1000));
-    return Math.max(MIN_RESERVATION_DAYS, elapsedDays);
   }
 
   const flexWindow = reserveForm.querySelector('input[name="flex_window"]:checked')?.value;
