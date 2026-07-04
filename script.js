@@ -228,8 +228,18 @@ function getReserveDayCount() {
 
   if (dateMode === 'exact') {
     if (!selectedStartDate || !selectedEndDate) return MIN_RESERVATION_DAYS;
-    const msPerDay = 24 * 60 * 60 * 1000;
-    return Math.max(MIN_RESERVATION_DAYS, Math.round((selectedEndDate - selectedStartDate) / msPerDay) + 1);
+    const startUtc = Date.UTC(
+      selectedStartDate.getFullYear(),
+      selectedStartDate.getMonth(),
+      selectedStartDate.getDate(),
+    );
+    const endUtc = Date.UTC(
+      selectedEndDate.getFullYear(),
+      selectedEndDate.getMonth(),
+      selectedEndDate.getDate(),
+    );
+    const elapsedDays = Math.round((endUtc - startUtc) / (24 * 60 * 60 * 1000));
+    return Math.max(MIN_RESERVATION_DAYS, elapsedDays);
   }
 
   const flexWindow = reserveForm.querySelector('input[name="flex_window"]:checked')?.value;
