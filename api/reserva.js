@@ -91,7 +91,7 @@ function buildHtmlEmail(payload) {
               ...(hasNotes ? [['Comentarios', selections.notes]] : []),
             ])}
             ${section('Facturación', [
-              ['Días facturados', compactValue(billing.chargedDays, '0')],
+              ['Noches facturadas', compactValue(billing.chargedNights, '0')],
               ['Precio total', total],
             ])}
             <p style="margin:20px 0 0;color:#6b625a;font-size:13px;line-height:1.6;">Solicitud enviada desde la web. Este mensaje no confirma la reserva automáticamente.</p>
@@ -154,7 +154,7 @@ module.exports = async function handler(request, response) {
   const billing = payload.billing || {};
   const email = String(contact.email || '').trim();
   const fullName = String(contact.fullName || '').trim();
-  const chargedDays = Number(billing.chargedDays);
+  const chargedNights = Number(billing.chargedNights);
 
   if (payload.honeypot) {
     jsonResponse(response, 200, { success: true });
@@ -170,11 +170,11 @@ module.exports = async function handler(request, response) {
     return;
   }
 
-  if (!Number.isFinite(chargedDays) || chargedDays < 2) {
+  if (!Number.isFinite(chargedNights) || chargedNights < 1) {
     jsonResponse(response, 400, {
       success: false,
       code: 'invalid_stay',
-      message: 'La estancia minima es de 2 dias.',
+      message: 'Selecciona fecha de entrada y salida.',
     });
     return;
   }

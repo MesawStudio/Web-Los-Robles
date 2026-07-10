@@ -43,7 +43,7 @@ const COOKIE_STORAGE_KEY = 'losrobles_cookie_choice_v1';
 const CALENDAR_MONTH_NAMES = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 const CALENDAR_DAY_NAMES = ['L', 'M', 'X', 'J', 'V', 'S', 'D'];
 const OPENING_DATE = new Date(2026, 6, 1);
-const MIN_RESERVATION_DAYS = 2;
+const MIN_RESERVATION_NIGHTS = 1;
 const RESERVE_FORM_ENDPOINT = '/api/reserva';
 const RESERVE_DEFAULT_ERROR_TITLE = 'Revisa la conexión e inténtalo de nuevo.';
 const RESERVE_DEFAULT_ERROR_MESSAGE = 'La solicitud no se ha enviado. Puedes volver al formulario y probar de nuevo en unos segundos.';
@@ -221,7 +221,7 @@ function getReserveDateSummary() {
   return `${flexWindow} · ${flexMonth}`;
 }
 
-function getInclusiveCalendarDayCount(startDate, endDate) {
+function getCalendarNightCount(startDate, endDate) {
   const startUtc = Date.UTC(
     startDate.getFullYear(),
     startDate.getMonth(),
@@ -233,31 +233,31 @@ function getInclusiveCalendarDayCount(startDate, endDate) {
     endDate.getDate(),
   );
 
-  return Math.round((endUtc - startUtc) / (24 * 60 * 60 * 1000)) + 1;
+  return Math.round((endUtc - startUtc) / (24 * 60 * 60 * 1000));
 }
 
-function getReserveDayCount() {
-  if (!reserveForm) return MIN_RESERVATION_DAYS;
+function getReserveNightCount() {
+  if (!reserveForm) return MIN_RESERVATION_NIGHTS;
 
   const dateMode = reserveForm.querySelector('input[name="date_mode"]:checked')?.value ?? 'exact';
 
   if (dateMode === 'exact') {
-    if (!selectedStartDate || !selectedEndDate) return MIN_RESERVATION_DAYS;
+    if (!selectedStartDate || !selectedEndDate) return MIN_RESERVATION_NIGHTS;
     return Math.max(
-      MIN_RESERVATION_DAYS,
-      getInclusiveCalendarDayCount(selectedStartDate, selectedEndDate),
+      MIN_RESERVATION_NIGHTS,
+      getCalendarNightCount(selectedStartDate, selectedEndDate),
     );
   }
 
   const flexWindow = reserveForm.querySelector('input[name="flex_window"]:checked')?.value;
-  const flexibleDays = {
+  const flexibleNights = {
     finde: 2,
     semana: 7,
     quincena: 15,
     mes: 30,
   };
 
-  return flexibleDays[flexWindow] || MIN_RESERVATION_DAYS;
+  return flexibleNights[flexWindow] || MIN_RESERVATION_NIGHTS;
 }
 
 function getReserveInfoItems() {
@@ -268,7 +268,7 @@ function getReserveInfoItems() {
     { label: 'Email', value: getReserveFieldValue('input[name="email"]') },
     { label: 'Teléfono', value: getReserveFieldValue('input[name="phone"]') },
     { label: 'Comentario', value: getReserveFieldValue('textarea[name="notes"]') },
-    { label: 'Fechas', value: `${getReserveDateSummary()} · ${getReserveDayCount()} día${getReserveDayCount() === 1 ? '' : 's'}`, variant: 'date' },
+    { label: 'Fechas', value: `${getReserveDateSummary()} · ${getReserveNightCount()} noche${getReserveNightCount() === 1 ? '' : 's'}`, variant: 'date' },
   ];
 
   return items.filter((item) => item.value);
@@ -280,19 +280,19 @@ function getReserveLineItems() {
   const adults = Number(getCounterInput('adults')?.value || 0);
   const children = Number(getCounterInput('children')?.value || 0);
   const pets = Number(getCounterInput('pets')?.value || 0);
-  const days = getReserveDayCount();
+  const nights = getReserveNightCount();
   const lines = [];
 
   if (adults > 0) {
-    lines.push({ label: 'Adultos', detail: `${adults} x ${formatEuro(RESERVE_PRICES.adults)} x ${days} día${days === 1 ? '' : 's'}`, amount: adults * RESERVE_PRICES.adults * days });
+    lines.push({ label: 'Adultos', detail: `${adults} x ${formatEuro(RESERVE_PRICES.adults)} x ${nights} noche${nights === 1 ? '' : 's'}`, amount: adults * RESERVE_PRICES.adults * nights });
   }
 
   if (children > 0) {
-    lines.push({ label: 'Niños (3-8)', detail: `${children} x ${formatEuro(RESERVE_PRICES.children)} x ${days} día${days === 1 ? '' : 's'}`, amount: children * RESERVE_PRICES.children * days });
+    lines.push({ label: 'Niños (3-8)', detail: `${children} x ${formatEuro(RESERVE_PRICES.children)} x ${nights} noche${nights === 1 ? '' : 's'}`, amount: children * RESERVE_PRICES.children * nights });
   }
 
   if (pets > 0) {
-    lines.push({ label: 'Mascotas', detail: `${pets} x ${formatEuro(RESERVE_PRICES.pets)} x ${days} día${days === 1 ? '' : 's'}`, amount: pets * RESERVE_PRICES.pets * days });
+    lines.push({ label: 'Mascotas', detail: `${pets} x ${formatEuro(RESERVE_PRICES.pets)} x ${nights} noche${nights === 1 ? '' : 's'}`, amount: pets * RESERVE_PRICES.pets * nights });
   }
 
   reserveForm.querySelectorAll('input[name="vehicle_items"]:checked').forEach((input) => {
@@ -301,8 +301,8 @@ function getReserveLineItems() {
     const quantity = getVehicleQuantity(input);
     lines.push({
       label: VEHICLE_LABELS[input.value] || input.value,
-      detail: `${quantity} x ${formatEuro(dailyAmount)} x ${days} día${days === 1 ? '' : 's'}`,
-      amount: quantity * dailyAmount * days,
+      detail: `${quantity} x ${formatEuro(dailyAmount)} x ${nights} noche${nights === 1 ? '' : 's'}`,
+      amount: quantity * dailyAmount * nights,
     });
   });
 
@@ -312,8 +312,8 @@ function getReserveLineItems() {
     const vehicleCount = Math.max(1, getSelectedVehicleCount());
     lines.push({
       label: 'Acceso a luz',
-      detail: `${vehicleCount} vehículo${vehicleCount === 1 ? '' : 's'} x ${formatEuro(dailyAmount)} x ${days} días`,
-      amount: vehicleCount * dailyAmount * days,
+      detail: `${vehicleCount} vehículo${vehicleCount === 1 ? '' : 's'} x ${formatEuro(dailyAmount)} x ${nights} noche${nights === 1 ? '' : 's'}`,
+      amount: vehicleCount * dailyAmount * nights,
       variant: 'utility',
     });
   }
@@ -420,7 +420,7 @@ function buildReservationSummary() {
     `Vehículos / elementos: ${selectedVehicles}`,
     `Acceso a luz: ${hasWaterElectricity}`,
     `Fechas: ${getReserveDateSummary()}`,
-    `Días facturados: ${getReserveDayCount()}`,
+    `Noches facturadas: ${getReserveNightCount()}`,
     `Total estimado: ${reserveTotal?.textContent || ''}`,
     `Comentarios: ${notes}`,
   ].join('\n');
@@ -482,7 +482,7 @@ function buildReservationPayload() {
       notes: notes || '',
     },
     billing: {
-      chargedDays: getReserveDayCount(),
+      chargedNights: getReserveNightCount(),
       total: reserveTotal?.textContent || formatEuro(getReserveTotalValue()),
     },
     plainText: [
@@ -497,7 +497,7 @@ function buildReservationPayload() {
       '',
       'Facturación:',
       [
-    `Días facturados: ${getReserveDayCount()}`,
+    `Noches facturadas: ${getReserveNightCount()}`,
     `Precio total: ${reserveTotal?.textContent || formatEuro(getReserveTotalValue())}`,
       ].join('\n'),
     ].join('\n'),
@@ -580,14 +580,14 @@ function showReserveValidationFeedback() {
     const dateMode = reserveForm.querySelector('input[name="date_mode"]:checked')?.value ?? 'exact';
     const hasValidExactDates = selectedStartDate
       && selectedEndDate
-      && getReserveDayCount() >= MIN_RESERVATION_DAYS;
+      && getReserveNightCount() >= MIN_RESERVATION_NIGHTS;
 
     if (dateMode === 'exact' && !hasValidExactDates) {
       clearReserveRequiredFeedback();
       calendarMinimumNotice?.classList.add('is-error');
-      setReserveFeedback('Selecciona una fecha de llegada y una salida con una estancia mínima de 2 días.', true);
+      setReserveFeedback('Selecciona una fecha de llegada y una salida.', true);
       if (reserveRequiredWarning) {
-        reserveRequiredWarning.textContent = 'Selecciona mínimo 2 días';
+        reserveRequiredWarning.textContent = 'Selecciona entrada y salida';
         reserveRequiredWarning.hidden = false;
       }
       calendarGrid?.scrollIntoView({ block: 'center', behavior: 'smooth' });
@@ -806,15 +806,15 @@ function onCalendarDateClick(dateValue) {
   if (!selectedStartDate || !isSelectingEndDate) {
     selectedStartDate = clickedDate;
     selectedEndDate = new Date(clickedDate);
-    selectedEndDate.setDate(selectedEndDate.getDate() + MIN_RESERVATION_DAYS - 1);
+    selectedEndDate.setDate(selectedEndDate.getDate() + MIN_RESERVATION_NIGHTS);
     isSelectingEndDate = true;
   } else if (clickedDate < selectedStartDate) {
     selectedStartDate = clickedDate;
     selectedEndDate = new Date(clickedDate);
-    selectedEndDate.setDate(selectedEndDate.getDate() + MIN_RESERVATION_DAYS - 1);
+    selectedEndDate.setDate(selectedEndDate.getDate() + MIN_RESERVATION_NIGHTS);
   } else {
     const minimumDeparture = new Date(selectedStartDate);
-    minimumDeparture.setDate(minimumDeparture.getDate() + MIN_RESERVATION_DAYS - 1);
+    minimumDeparture.setDate(minimumDeparture.getDate() + MIN_RESERVATION_NIGHTS);
     selectedEndDate = clickedDate < minimumDeparture ? minimumDeparture : clickedDate;
     isSelectingEndDate = false;
   }
