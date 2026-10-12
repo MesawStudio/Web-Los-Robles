@@ -6,7 +6,7 @@
   <title>Camping Los Robles Sanabria | Camping en Sanabria</title>
   <meta
     name="description"
-    content="Camping en Sanabria junto al Lago de Sanabria. Solicita tu estancia en Los Robles Sanabria con parcelas para tienda, automóvil, camper o caravana."
+    content="Camping Los Robles Sanabria, junto al Lago de Sanabria, permanecerá cerrado hasta Semana Santa de 2027. Reservas temporalmente suspendidas."
   />
   <link rel="canonical" href="https://campinglosrobles.com/" />
   <meta name="robots" content="index, follow" />
@@ -14,12 +14,12 @@
   <meta property="og:locale" content="es_ES" />
   <meta property="og:site_name" content="Camping Los Robles" />
   <meta property="og:title" content="Camping Los Robles Sanabria | Lago de Sanabria" />
-  <meta property="og:description" content="Solicita tu estancia en Camping Los Robles Sanabria, junto al Lago de Sanabria, con parcelas para tienda, automóvil, camper o caravana." />
+  <meta property="og:description" content="Camping Los Robles Sanabria permanecerá cerrado hasta Semana Santa de 2027. Reservas temporalmente suspendidas." />
   <meta property="og:url" content="https://campinglosrobles.com/" />
   <meta property="og:image" content="https://campinglosrobles.com/assets/hero-new.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="Camping Los Robles Sanabria | Lago de Sanabria" />
-  <meta name="twitter:description" content="Camping en Sanabria y alojamientos en Sanabria junto al Lago de Sanabria. Solicita disponibilidad y recibe confirmación personalizada." />
+  <meta name="twitter:description" content="Camping Los Robles Sanabria permanecerá cerrado hasta Semana Santa de 2027. Reservas temporalmente suspendidas." />
   <meta name="twitter:image" content="https://campinglosrobles.com/assets/hero-new.jpg" />
   <meta name="theme-color" content="#c46a2d" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -36,7 +36,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=20261012-1" />
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -63,10 +63,18 @@
     "mainEntity": [
       {
         "@type": "Question",
+        "name": "¿Cuándo vuelve a abrir el camping?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "El camping permanecerá cerrado hasta Semana Santa de 2027. Las solicitudes de reserva están temporalmente suspendidas. La fecha de reapertura se publicará cuando esté confirmada."
+        }
+      },
+      {
+        "@type": "Question",
         "name": "¿Cómo funciona la solicitud de reserva?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Envías la solicitud con fechas, ocupación y necesidades. El camping revisa disponibilidad y te contacta para confirmar la estancia."
+          "text": "Las solicitudes están temporalmente suspendidas. Cuando reabramos las reservas, podrás enviar tus fechas, ocupación y necesidades desde el formulario."
         }
       },
       {
@@ -117,6 +125,7 @@
       <div class="hero-shell">
         <h1 class="sr-only">Camping Los Robles Sanabria en el Lago de Sanabria</h1>
         <img class="hero-logo-mark" src="assets/logo-los-robles.svg" alt="Camping Los Robles" />
+        <p class="season-closure-notice">Cerrado hasta Semana Santa de 2027. Las reservas están temporalmente suspendidas.</p>
       </div>
     </section>
 
@@ -176,11 +185,11 @@
     <section class="cta-section" data-header-tone="dark">
       <div class="section-shell cta-card reveal">
         <div class="cta-copy">
-          <h2>Si el entorno encaja contigo, lo siguiente es asegurar fechas.</h2>
+          <h2>Nos vemos en Semana Santa de 2027.</h2>
         </div>
         <div class="cta-actions">
-          <p class="cta-traits">Lago · Naturaleza · Escapadas · Descanso · Reserva bajo solicitud</p>
-          <a class="btn btn-primary reserve-link" href="#reserve-modal" data-open-reserve="true">Reservar</a>
+          <p class="cta-traits">El camping permanece cerrado y las reservas están temporalmente suspendidas.</p>
+          <a class="btn btn-primary reserve-link" href="#reserve-modal" data-open-reserve="true">Información de apertura</a>
         </div>
       </div>
     </section>
@@ -195,8 +204,12 @@
         <div class="faq-panel reveal">
           <div class="faq-list">
             <details class="faq-item">
+              <summary>¿Cuándo vuelve a abrir el camping?</summary>
+              <p>El camping permanecerá cerrado hasta Semana Santa de 2027. De momento no aceptamos solicitudes de reserva. Publicaremos aquí la fecha de reapertura y la disponibilidad cuando estén confirmadas.</p>
+            </details>
+            <details class="faq-item">
               <summary>¿Cómo funciona la solicitud de reserva?</summary>
-              <p>Rellenas el formulario con fechas, ocupación, vehículo y necesidades. Revisaremos disponibilidad y te contactaremos para confirmar si la estancia encaja.</p>
+              <p>Las solicitudes están temporalmente suspendidas. Cuando reabramos las reservas, podrás enviar tus fechas, ocupación, vehículo y necesidades desde el formulario.</p>
             </details>
             <details class="faq-item">
               <summary>¿La reserva queda confirmada al enviar el formulario?</summary>
@@ -297,15 +310,21 @@
     </div>
   </footer>
 
-  <div class="reserve-modal" id="reserve-modal" aria-hidden="true">
+  <div class="reserve-modal is-closed-for-season" id="reserve-modal" aria-hidden="true">
     <div class="reserve-modal-backdrop" data-close-reserve="true"></div>
-    <div class="reserve-dialog" role="dialog" aria-modal="true" aria-labelledby="reserve-title">
+    <div class="reserve-dialog" role="dialog" aria-modal="true" aria-labelledby="reserve-title" aria-describedby="reserve-closure-copy">
       <div class="reserve-dialog-copy">
-        <h2 id="reserve-title">Solicitud de reserva</h2>
+        <h2 id="reserve-title">Reservas pausadas</h2>
         <button class="reserve-close" type="button" aria-label="Cerrar formulario" data-close-reserve="true">+</button>
       </div>
 
-      <form class="reserve-form" id="reserve-form">
+      <div class="reserve-closure-message" id="reserve-closure-copy">
+        <p class="reserve-closure-kicker">Próxima temporada</p>
+        <h3>Nos vemos en Semana Santa de 2027.</h3>
+        <p>El camping permanece cerrado y, por ahora, no estamos aceptando solicitudes de reserva. Publicaremos aquí la fecha de reapertura y la disponibilidad en cuanto estén confirmadas.</p>
+      </div>
+
+      <form class="reserve-form" id="reserve-form" hidden inert aria-hidden="true">
         <input type="text" name="_honey" tabindex="-1" autocomplete="off" class="visually-hidden-field" />
         <input type="hidden" name="form_origin" value="Landing Lago de Sanabria" />
         <div class="reserve-fields-view" data-reserve-view="form">
@@ -491,7 +510,7 @@
                   <div class="calendar-toolbar">
                     <button class="calendar-nav" type="button" data-calendar-nav="prev" aria-label="Mes anterior">‹</button>
                     <div class="calendar-selection">
-                      <span data-selected-range="true">Disponible desde el 1 de julio de 2026</span>
+                      <span data-selected-range="true">Reservas temporalmente suspendidas</span>
                     </div>
                     <button class="calendar-nav" type="button" data-calendar-nav="next" aria-label="Mes siguiente">›</button>
                   </div>
@@ -596,7 +615,7 @@
         </div>
       </div>
     </div>
-    <button class="reserve-cart-toggle" type="button" aria-label="Ver resumen de la reserva" data-open-reserve-summary="true">
+    <button class="reserve-cart-toggle" type="button" aria-label="Ver resumen de la reserva" data-open-reserve-summary="true" hidden>
       <span class="reserve-cart-warning" data-reserve-required-warning="true" hidden>Rellene los campos obligatorios</span>
       <span class="reserve-cart-edit">Editar</span>
       <span class="vehicle-total-icon" aria-hidden="true">
@@ -610,8 +629,8 @@
     </button>
   </div>
 
-  <a class="floating-reserve reserve-link" href="#reserve-modal" data-open-reserve="true" aria-label="Reservar ahora">
-    <span class="floating-reserve-text">Reservar</span>
+  <a class="floating-reserve reserve-link" href="#reserve-modal" data-open-reserve="true" aria-label="Información de apertura">
+    <span class="floating-reserve-text">Apertura 2027</span>
   </a>
 
   <aside class="cookie-banner" id="cookie-banner" aria-live="polite" aria-label="Aviso de cookies">

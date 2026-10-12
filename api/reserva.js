@@ -1,5 +1,6 @@
 const RESEND_ENDPOINT = 'https://api.resend.com/emails';
 const DAILY_LIMIT_MESSAGE = 'Servicio de solicitudes saturado por hoy.';
+const RESERVATIONS_PAUSED = true;
 
 function jsonResponse(response, status, body) {
   response.statusCode = status;
@@ -125,6 +126,15 @@ module.exports = async function handler(request, response) {
   if (request.method !== 'POST') {
     response.setHeader('Allow', 'POST');
     jsonResponse(response, 405, { success: false, code: 'method_not_allowed', message: 'Metodo no permitido.' });
+    return;
+  }
+
+  if (RESERVATIONS_PAUSED) {
+    jsonResponse(response, 503, {
+      success: false,
+      code: 'reservations_paused',
+      message: 'El camping permanece cerrado hasta Semana Santa de 2027. Las reservas están temporalmente suspendidas.',
+    });
     return;
   }
 

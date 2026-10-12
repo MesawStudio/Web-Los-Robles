@@ -245,6 +245,17 @@ select {
   filter: drop-shadow(0 18px 44px rgba(0, 0, 0, 0.26));
 }
 
+.season-closure-notice {
+  max-width: 640px;
+  margin: 24px 0 0;
+  color: var(--paper-strong);
+  font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+  font-weight: 700;
+  line-height: 1.5;
+  text-wrap: balance;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+}
+
 .eyebrow {
   margin: 0 0 18px;
   color: rgba(255, 253, 249, 0.74);
@@ -982,6 +993,44 @@ h3 {
 .reserve-form {
   display: grid;
   gap: 22px;
+}
+
+.reserve-form[hidden],
+.reserve-cart-toggle[hidden] {
+  display: none !important;
+}
+
+.reserve-closure-message {
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 28px 10px 46px;
+  text-align: center;
+}
+
+.reserve-closure-kicker {
+  margin: 0 0 14px;
+  color: var(--gold-deep);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.reserve-closure-message h3 {
+  font-size: clamp(2rem, 4vw, 3.5rem);
+  line-height: 1.05;
+}
+
+.reserve-closure-message p:last-child {
+  max-width: 55ch;
+  margin: 20px auto 0;
+  color: #52575a;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.reserve-modal.is-closed-for-season .reserve-dialog {
+  padding-bottom: 0;
 }
 
 .reserve-status-view {
